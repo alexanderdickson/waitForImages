@@ -1,3 +1,16 @@
+/*
+ * waitForImages 1.0
+ * -----------------
+ * Provides a callback when all images have loaded in your given selector.
+ * http://www.alexanderdickson.com/
+ *
+ *
+ * Copyright (c) 2011 Alex Dickson
+ * Licensed under the MIT licenses.
+ * See website for more info.
+ *
+ */
+
 ;(function($) {
     $.fn.waitForImages = function(callback) {
         if (typeof callback != 'function') {
