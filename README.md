@@ -1,4 +1,4 @@
-#waitForImages 1.0#
+#waitForImages 1.1#
 
 Copyright (c) 2011 Alex Dickson
 Licensed under the MIT licenses.
@@ -14,9 +14,9 @@ It can be useful when WebKit incorrectly reports element dimensions on document 
 
 ##Usage##
 
-$('selector').waitForImages(function() {
+    $('selector').waitForImages(function() {
 
-    alert('Images have loaded');
+        alert('Images have loaded');
 
-});
+    });
 
