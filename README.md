@@ -1,9 +1,10 @@
 #waitForImages 1.1#
 
 Copyright (c) 2011 Alex Dickson
+
 Licensed under the MIT licenses.
 
-http://www.alexanderdickson.com/
+[http://www.alexanderdickson.com](http://www.alexanderdickson.com)
 
 ##Overview##
 
