@@ -13,7 +13,7 @@
 
 ;(function($) {
     $.fn.waitForImages = function(callback) {
-        if (typeof callback != 'function') {
+        if ( ! $.isFunction(callback)) {
             throw 'Not a valid callback';
         };
 
