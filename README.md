@@ -17,7 +17,7 @@ It can be useful when WebKit incorrectly reports element dimensions on document 
 
 ###Standard###
 
-Just provide a callback function and it will be called once all descendent image have loaded.
+Just provide a callback function and it will be called once all descendent images have loaded.
 
     $('selector').waitForImages(function() {
 
@@ -27,7 +27,7 @@ Just provide a callback function and it will be called once all descendent image
 
 ###Advanced###
 
-You can pass a second function as a callback. It will be called when each image is loaded, as well as some information about what has loaded.
+You can pass a second function as a callback. It will be called for each image that is loaded, with some information.
 
     $('selector').waitForImages(function() {
 
