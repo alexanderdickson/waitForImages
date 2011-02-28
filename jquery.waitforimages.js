@@ -41,9 +41,7 @@
                 var image = $(this)[0];
                 image.onload = function() {
                     allImgsLoaded++;
-                    
                     eachCallback.call(image, allImgsLoaded, allImgsLength);
-
                     if (allImgsLoaded == allImgsLength) {
                         finishedCallback.call();
                         return false;

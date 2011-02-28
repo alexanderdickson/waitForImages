@@ -8,16 +8,34 @@ Licensed under the MIT licenses.
 
 ##Overview##
 
-Provides a callback when all images have loaded in your given selector.
+Provides usefull callbacks once descendent images have loaded.
 
 It can be useful when WebKit incorrectly reports element dimensions on document ready, because it has not calculated their descendent img dimensions yet.
 
 
 ##Usage##
 
+###Standard###
+
+Just provide a callback function and it will be called once all descendent image have loaded.
+
     $('selector').waitForImages(function() {
 
-        alert('Images have loaded');
+        alert('All images are loaded.');
 
     });
 
+###Advanced###
+
+You can pass a second function as a callback. It will be called when each image is loaded, as well as some information about what has loaded.
+
+    $('selector').waitForImages(function() {
+
+        alert('All images are loaded.');
+
+    }, function(loaded, count) {
+
+       alert(loaded + ' of ' + count + ' images have loaded.');
+       $(this).addClass('loaded');
+
+    });
