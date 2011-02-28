@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <title>waitForImages test</title>
+
+
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+      <script type="text/javascript" src="../jquery.waitforimages.js"></script>
+
+      <script type="text/javascript">
+      //<![CDATA
+
+      $(function() {
+
+        // Make a bunch of images that our browser has to download for this example.
+        for (var j = 0; j < 20; j++) {
+
+          $('<img />', {
+              'alt': '',
+              'src': 'http://www.gravatar.com/avatar/' + Math.ceil(Math.random() * 32) + '?s=100&d=identicon',
+              'width': '10px',
+              'height': '10px'
+          }).appendTo('body');
+
+        }
+
+        // Test plugin
+
+        $('body').waitForImages(
+           function() {
+           $('body').append('<p>Images loaded.</p>');
+           },
+           function(loaded, total) {
+           $(this).css({ border: '1px solid #ccc' });
+           $('body').append('<p>Image ' + loaded + ' of ' + total + ' loaded.</p>');
+        });
+
+      });
+      //]]>
+      </script>
+
+    </head>
+    <body>
+    </body>
+</html>

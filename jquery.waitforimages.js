@@ -12,9 +12,12 @@
  */
 
 ;(function($) {
-    $.fn.waitForImages = function(callback) {
-        if ( ! $.isFunction(callback)) {
-            throw 'Not a valid callback';
+    $.fn.waitForImages = function(finishedCallback, eachCallback) {
+        
+        eachCallback = eachCallback || function() {};
+
+        if ( ! $.isFunction(finishedCallback) ||  ! $.isFunction(eachCallback)) {
+            throw 'A non valid callback was supplied.';
         };
 
         var objs = $(this),
@@ -23,7 +26,7 @@
             allImgsLoaded = 0;
         
         if (allImgsLength == 0) {
-            callback.call();
+            finishedCallback.call();
         };
 
         return objs.each(function() {
@@ -35,15 +38,17 @@
             };
 
             imgs.each(function() {
-                var image = new Image();
+                var image = $(this)[0];
                 image.onload = function() {
                     allImgsLoaded++;
+                    
+                    eachCallback.call(image, allImgsLoaded, allImgsLength);
+
                     if (allImgsLoaded == allImgsLength) {
-                        callback.call();
+                        finishedCallback.call();
                         return false;
                     };
                 };
-                image.src = this.src;
             });
         });
     };
