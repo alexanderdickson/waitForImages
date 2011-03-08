@@ -19,7 +19,7 @@
         if ( ! $.isFunction(finishedCallback) ||  ! $.isFunction(eachCallback)) {
             throw {
                 name: 'invalid_callback',
-                message: 'A non valid callback was supplied.'
+                message: 'An invalid callback was supplied.'
             };
         };
 
@@ -41,7 +41,7 @@
             };
 
             imgs.each(function() {
-                var image = $(this)[0];
+                var image = this;
                 image.onload = function() {
                     allImgsLoaded++;
                     eachCallback.call(image, allImgsLoaded, allImgsLength);
