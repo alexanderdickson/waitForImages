@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.0
+ * waitForImages 1.1
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -17,7 +17,10 @@
         eachCallback = eachCallback || function() {};
 
         if ( ! $.isFunction(finishedCallback) ||  ! $.isFunction(eachCallback)) {
-            throw 'A non valid callback was supplied.';
+            throw {
+                name: 'invalid_callback',
+                message: 'A non valid callback was supplied.'
+            };
         };
 
         var objs = $(this),
