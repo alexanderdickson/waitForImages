@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.1
+ * waitForImages 1.1.1
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -13,7 +13,7 @@
 
 ;(function($) {
     $.fn.waitForImages = function(finishedCallback, eachCallback) {
-        
+
         eachCallback = eachCallback || function() {};
 
         if ( ! $.isFunction(finishedCallback) ||  ! $.isFunction(eachCallback)) {
@@ -27,9 +27,9 @@
             allImgs = objs.find('img'),
             allImgsLength = allImgs.length,
             allImgsLoaded = 0;
-        
+
         if (allImgsLength == 0) {
-            finishedCallback.call();
+            finishedCallback.call(this);
         };
 
         return objs.each(function() {
@@ -46,7 +46,7 @@
                     allImgsLoaded++;
                     eachCallback.call(image, allImgsLoaded, allImgsLength);
                     if (allImgsLoaded == allImgsLength) {
-                        finishedCallback.call();
+                        finishedCallback.call(obj);
                         return false;
                     };
                 };
