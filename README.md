@@ -1,4 +1,4 @@
-#waitForImages 1.1#
+#waitForImages 1.1.1#
 
 Copyright (c) 2011 Alex Dickson
 
@@ -20,7 +20,7 @@ It can be useful when WebKit incorrectly reports element dimensions on document 
 Just provide a callback function and it will be called once all descendent images have loaded.
 
     $('selector').waitForImages(function() {
-
+   
         alert('All images are loaded.');
 
     });
