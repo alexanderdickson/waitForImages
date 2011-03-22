@@ -46,7 +46,7 @@
                     allImgsLoaded++;
                     eachCallback.call(image, allImgsLoaded, allImgsLength);
                     if (allImgsLoaded == allImgsLength) {
-                        finishedCallback.call(obj);
+                        finishedCallback.call(obj[0]);
                         return false;
                     };
                 };
