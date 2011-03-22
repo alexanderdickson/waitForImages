@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.1.1
+ * waitForImages 1.1.2
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -41,15 +41,19 @@
             };
 
             imgs.each(function() {
-                var image = this;
+                var image = new Image,
+                    imgElement = this;
+
                 image.onload = function() {
                     allImgsLoaded++;
-                    eachCallback.call(image, allImgsLoaded, allImgsLength);
+                    eachCallback.call(imgElement, allImgsLoaded, allImgsLength);
                     if (allImgsLoaded == allImgsLength) {
                         finishedCallback.call(obj[0]);
                         return false;
                     };
                 };
+
+                image.src = this.src;
             });
         });
     };
