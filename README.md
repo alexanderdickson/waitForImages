@@ -1,4 +1,4 @@
-#waitForImages 1.1.1#
+#waitForImages 1.2#
 
 Copyright (c) 2011 Alex Dickson
 
@@ -9,6 +9,8 @@ Licensed under the MIT licenses.
 ##Overview##
 
 Provides usefull callbacks once descendent images have loaded.
+
+waitForImages 1.2 now supports images references in CSS.
 
 It can be useful when WebKit incorrectly reports element dimensions on document ready, because it has not calculated their descendent img dimensions yet.
 
@@ -27,7 +29,7 @@ Just provide a callback function and it will be called once all descendent image
 
 ###Advanced###
 
-You can pass a second function as a callback. It will be called for each image that is loaded, with some information.
+You can pass a second function as a callback. It will be called for each image that is loaded, with some information passed as arguments.
 
     $('selector').waitForImages(function() {
 
@@ -39,3 +41,21 @@ You can pass a second function as a callback. It will be called for each image t
        $(this).addClass('loaded');
 
     });
+
+You can also set the third argument to true if you'd like the plugin to iterate over all elements, checking for images referenced in the CSS. If it finds any, they will be treated as an image and loaded.
+
+Alternatively, you can pass an object literal of these functions.
+
+    $('selector').waitForImages({
+        finished: function() {
+            ...
+        },
+        each: function() {
+           ...
+        },
+        waitForAll: true
+   });
+
+You may also set the CSS properties that possibly contain image references yourself. Just assign an array of properties.
+
+    $().waitForImages.hasImgProperties = ['backgroundImage'];
