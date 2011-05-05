@@ -54,7 +54,7 @@ Alternatively, you can pass an object literal of these functions.
            ...
         },
         waitForAll: true
-   });
+    });
 
 You may also set the CSS properties that possibly contain image references yourself. Just assign an array of properties.
 
