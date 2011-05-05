@@ -44,7 +44,7 @@ You can pass a second function as a callback. It will be called for each image t
 
 You can also set the third argument to true if you'd like the plugin to iterate over all elements, checking for images referenced in the CSS. If it finds any, they will be treated as an image and loaded.
 
-Alternatively, you can pass an object literal of these functions.
+Alternatively, you can pass an object literal to the plugin, instead of the arguments individually.
 
     $('selector').waitForImages({
         finished: function() {
@@ -56,6 +56,6 @@ Alternatively, you can pass an object literal of these functions.
         waitForAll: true
     });
 
-You may also set the CSS properties that possibly contain image references yourself. Just assign an array of properties.
+You may also set the CSS properties that possibly contain image references yourself. Just assign an array of properties to the plugin.
 
     $().waitForImages.hasImgProperties = ['backgroundImage'];
