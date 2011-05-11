@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.2
+ * waitForImages 1.2.1
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -48,8 +48,8 @@
                     'borderImage',
                     'borderCornerImage'
                     ];
-
-                var matchUrl = /url\((.*?)\)/g;
+                   
+                var matchUrl = /url\(['"]?(.*?)['"]?\)/g;
 
                 // Get all elements, as any one of them could have a background image.
                 obj.find('*').filter(function() {
@@ -64,15 +64,15 @@
                     }
 
                     $.each(hasImgProperties, function(i, property) {
-                        var property = element.css(property);
+                        var propertyValue = element.css(property);
                         // If it doesn't contain this property, skip.
-                        if ( ! property) {
+                        if ( ! propertyValue) {
                             return true;
                         }
 
                         // Get all url() of this element.
                         var match;
-                        while (match = matchUrl.exec(property)) {
+                        while (match = matchUrl.exec(propertyValue)) {
                             allImgs.push({
                                 src: match[1],
                                 element: element[0]
