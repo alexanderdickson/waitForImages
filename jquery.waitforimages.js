@@ -21,7 +21,8 @@
             finishedCallback = finishedCallback.finished;
         }
 
-        // Handle missing callback.
+        // Handle missing callbacks.
+        finishedCallback = finishedCallback || function() {};
         eachCallback = eachCallback || function() {};
 
         // Convert waitForAll to Boolean
@@ -49,7 +50,7 @@
                     'borderCornerImage'
                     ];
                    
-                var matchUrl = /url\(['"]?(.*?)['"]?\)/g;
+                var matchUrl = /url\(['"]?(.*?)\1\)/g;
 
                 // Get all elements, as any one of them could have a background image.
                 obj.find('*').filter(function() {
