@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.2.1
+ * waitForImages 1.2.2
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -30,10 +30,7 @@
 
         // Ensure callbacks are functions.
         if (!$.isFunction(finishedCallback) || !$.isFunction(eachCallback)) {
-            throw {
-                name: 'invalid_callback',
-                message: 'An invalid callback was supplied.'
-            };
+            throw new TypeError('An invalid callback was supplied.');
         };
 
         return this.each(function() {

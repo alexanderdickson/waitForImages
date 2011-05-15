@@ -1,4 +1,4 @@
-#waitForImages 1.2.1#
+#waitForImages 1.2.2#
 
 Copyright (c) 2011 Alex Dickson
 
