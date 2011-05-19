@@ -58,4 +58,4 @@ Alternatively, you can pass an object literal to the plugin, instead of the argu
 
 You may also set the CSS properties that possibly contain image references yourself. Just assign an array of properties to the plugin.
 
-    $().waitForImages.hasImgProperties = ['backgroundImage'];
+    $.fn.waitForImages.hasImgProperties = ['backgroundImage'];
