@@ -54,11 +54,9 @@
                     var element = $(this);
 
                     // If an `img` element, add it. But keep iterating in case it has a background image too.
-                    if (element.is('img')) {
-                        var imageSource =  element.attr('src');
-                        if (typeof(imageSource) === 'undefined' || imageSource == '') { return; }
+                    if (element.is('img[src!=""]')) {
                         allImgs.push({
-                            src: imageSource,
+                            src: element.attr('src'),
                             element: element[0]
                         });
                     }
@@ -82,8 +80,7 @@
                 });
             } else {
                 // For images only, the task is simpler.
-                obj.find('img').each(function() {
-                    if (typeof(this.src) === 'undefined' || this.src == '') { return; }
+                obj.find('img[src!=""]').each(function() {
                     allImgs.push({
                         src: this.src,
                         element: this
