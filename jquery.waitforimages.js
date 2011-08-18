@@ -55,10 +55,10 @@
 
                     // If an `img` element, add it. But keep iterating in case it has a background image too.
                     if (element.is('img')) {
-                        var image_source =  element.attr('src');
-                        if (typeof(image_source) === 'undefined' || image_source == '') { return; }
+                        var imageSource =  element.attr('src');
+                        if (typeof(imageSource) === 'undefined' || imageSource == '') { return; }
                         allImgs.push({
-                            src: image_source,
+                            src: imageSource,
                             element: element[0]
                         });
                     }
