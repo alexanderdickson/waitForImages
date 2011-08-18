@@ -47,7 +47,7 @@
                     'borderCornerImage'
                     ];
                    
-                var matchUrl = /url\(['"]?(.*?)\1\)/g;
+                var matchUrl = /url\((['"]?)(.*?)\1\)/g;
 
                 // Get all elements, as any one of them could have a background image.
                 obj.find('*').filter(function() {
@@ -74,7 +74,7 @@
                         var match;
                         while (match = matchUrl.exec(propertyValue)) {
                             allImgs.push({
-                                src: match[1],
+                                src: match[2],
                                 element: element[0]
                             });
                         };
