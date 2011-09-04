@@ -1,4 +1,4 @@
-#waitForImages 1.2.2#
+#waitForImages 1.3#
 
 Copyright (c) 2011 Alex Dickson
 
@@ -8,12 +8,15 @@ Licensed under the MIT licenses.
 
 ##Overview##
 
-Provides usefull callbacks once descendent images have loaded.
+Provides useful callbacks once descendent images have loaded.
 
-waitForImages 1.2 now supports images references in CSS.
+waitForImages also supports images references in CSS.
 
-It can be useful when WebKit incorrectly reports element dimensions on document ready, because it has not calculated their descendent img dimensions yet.
+It can be useful when WebKit incorrectly reports element dimensions/offsets on document ready, because it has not calculated their descendent `img` dimensions yet.
 
+##Thanks##
+
+Matt Scharley.
 
 ##Usage##
 
@@ -33,16 +36,19 @@ You can pass a second function as a callback. It will be called for each image t
 
     $('selector').waitForImages(function() {
 
-        alert('All images are loaded.');
+        alert('All images have loaded.');
 
-    }, function(loaded, count) {
+    }, function(loaded, count, success) {
 
-       alert(loaded + ' of ' + count + ' images have loaded.');
+       alert(loaded + ' of ' + count + ' images has ' + (success ? 'failed to load' : 'loaded') +  '.');
        $(this).addClass('loaded');
 
     });
 
+
 You can also set the third argument to true if you'd like the plugin to iterate over all elements, checking for images referenced in the CSS. If it finds any, they will be treated as an image and loaded.
+
+The callback will be called on the successful **and** unsuccessful loading of the image. Check the third argument to determine the success of the image load. It will be `true` if the image loaded successfully.
 
 Alternatively, you can pass an object literal to the plugin, instead of the arguments individually.
 
@@ -58,4 +64,6 @@ Alternatively, you can pass an object literal to the plugin, instead of the argu
 
 You may also set the CSS properties that possibly contain image references yourself. Just assign an array of properties to the plugin.
 
-    $.fn.waitForImages.hasImgProperties = ['backgroundImage'];
+    $.waitForImages.hasImgProperties = ['backgroundImage'];
+
+waitForImages also exposes a custom selector, `:uncached`, which when used in conjunction with the `img` selector, allows you to select `img` elements that are not cached already by the browser.

@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.2.2
+ * waitForImages 1.3
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -12,10 +12,27 @@
  */
 
 ;(function($) {
+    
+    // CSS properties which contain references to images. 
+    $.waitForImages = {
+        hasImageProperties: [
+        'backgroundImage',
+        'listStyleImage',
+        'borderImage',
+        'borderCornerImage'
+        ]
+    };
+    
+    // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
+    $.expr[':'].uncached = function(obj) {
+        return $(obj).is('img[src!=""]') && ! obj.complete; 
+    };
+    
     $.fn.waitForImages = function(finishedCallback, eachCallback, waitForAll) {
 
         // Handle options object.
-        if (typeof finishedCallback === 'object') {
+        // Use this convoluted form because `typeof` says an `Array` is an `Object`.
+        if (Object.prototype.toString.call(finishedCallback) == '[object Object]') {
             eachCallback = finishedCallback.each;
             waitForAll = finishedCallback.waitForAll;
             finishedCallback = finishedCallback.finished;
@@ -40,21 +57,15 @@
 
             if (waitForAll) {
                 // CSS properties which may contain an image.
-                var hasImgProperties = $.fn.waitForImages.hasImgProperties || [
-                    'backgroundImage',
-                    'listStyleImage',
-                    'borderImage',
-                    'borderCornerImage'
-                    ];
-                   
-                var matchUrl = /url\((['"]?)(.*?)\1\)/g;
-
+                var hasImgProperties = $.waitForImages.hasImageProperties,
+                    matchUrl = /url\((['"]?)(.*?)\1\)/g;
+                
                 // Get all elements, as any one of them could have a background image.
-                obj.find('*').filter(function() {
+                obj.find('*').each(function() {
                     var element = $(this);
 
                     // If an `img` element, add it. But keep iterating in case it has a background image too.
-                    if (element.is('img[src!=""]')) {
+                    if (element.is('img:uncached')) {
                         allImgs.push({
                             src: element.attr('src'),
                             element: element[0]
@@ -80,7 +91,9 @@
                 });
             } else {
                 // For images only, the task is simpler.
-                obj.find('img[src!=""]').each(function() {
+                obj
+                 .find('img:uncached')
+                 .each(function() {
                     allImgs.push({
                         src: this.src,
                         element: this
@@ -97,17 +110,22 @@
             };
 
             $.each(allImgs, function(i, img) {
-
+                
                 var image = new Image;
-
-                image.onload = function() {
+                
+                // Handle the image loading and error with the same callback.
+                $(image).bind('load error', function(event) {
                     allImgsLoaded++;
-                    eachCallback.call(img.element, allImgsLoaded, allImgsLength);
+                    
+                    // If an error occurred with loading the image, set the third argument accordingly.
+                    eachCallback.call(img.element, allImgsLoaded, allImgsLength, event.type == 'load');
+                    
                     if (allImgsLoaded == allImgsLength) {
                         finishedCallback.call(obj[0]);
                         return false;
                     };
-                };
+                    
+                });
 
                 image.src = img.src;
             });
