@@ -47,14 +47,14 @@
                     'borderCornerImage'
                     ];
                    
-                var matchUrl = /url\(['"]?(.*?)\1\)/g;
+                var matchUrl = /url\((['"]?)(.*?)\1\)/g;
 
                 // Get all elements, as any one of them could have a background image.
                 obj.find('*').filter(function() {
                     var element = $(this);
 
                     // If an `img` element, add it. But keep iterating in case it has a background image too.
-                    if (element.is('img')) {
+                    if (element.is('img[src!=""]')) {
                         allImgs.push({
                             src: element.attr('src'),
                             element: element[0]
@@ -72,7 +72,7 @@
                         var match;
                         while (match = matchUrl.exec(propertyValue)) {
                             allImgs.push({
-                                src: match[1],
+                                src: match[2],
                                 element: element[0]
                             });
                         };
@@ -80,7 +80,7 @@
                 });
             } else {
                 // For images only, the task is simpler.
-                obj.find('img').each(function() {
+                obj.find('img[src!=""]').each(function() {
                     allImgs.push({
                         src: this.src,
                         element: this
