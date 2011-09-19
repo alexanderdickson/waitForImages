@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.3
+ * waitForImages 1.3.1
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -31,8 +31,7 @@
     $.fn.waitForImages = function(finishedCallback, eachCallback, waitForAll) {
 
         // Handle options object.
-        // Use this convoluted form because `typeof` says an `Array` is an `Object`.
-        if (Object.prototype.toString.call(finishedCallback) == '[object Object]') {
+        if ($.type(arguments[0]) == 'object') {
             eachCallback = finishedCallback.each;
             waitForAll = finishedCallback.waitForAll;
             finishedCallback = finishedCallback.finished;
