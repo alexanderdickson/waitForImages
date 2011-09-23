@@ -31,7 +31,7 @@
     $.fn.waitForImages = function(finishedCallback, eachCallback, waitForAll) {
 
         // Handle options object.
-        if ($.type(arguments[0]) == 'object') {
+        if ($.isPlainObject(arguments[0])) {
             eachCallback = finishedCallback.each;
             waitForAll = finishedCallback.waitForAll;
             finishedCallback = finishedCallback.finished;
@@ -56,7 +56,7 @@
 
             if (waitForAll) {
                 // CSS properties which may contain an image.
-                var hasImgProperties = $.waitForImages.hasImageProperties,
+                var hasImgProperties = $.waitForImages.hasImageProperties || [],
                     matchUrl = /url\((['"]?)(.*?)\1\)/g;
                 
                 // Get all elements, as any one of them could have a background image.
