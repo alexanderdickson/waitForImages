@@ -1,6 +1,6 @@
-#waitForImages 1.3.1#
+#waitForImages 1.3.2#
 
-Copyright (c) 2011 Alex Dickson
+Copyright (c) 2011 Alex Dickson [@alexdickson](http://twitter.com/alexdickson)
 
 Licensed under the MIT licenses.
 
@@ -16,7 +16,7 @@ It can be useful when WebKit incorrectly reports element dimensions/offsets on d
 
 ##Thanks##
 
-Matt Scharley.
+[Matt Scharley](https://github.com/mscharley).
 
 ##Usage##
 

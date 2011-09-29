@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.3.1
+ * waitForImages 1.3.2
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -38,8 +38,8 @@
         }
 
         // Handle missing callbacks.
-        finishedCallback = finishedCallback || function() {};
-        eachCallback = eachCallback || function() {};
+        finishedCallback = finishedCallback || $.noop;
+        eachCallback = eachCallback || $.noop;
 
         // Convert waitForAll to Boolean
         waitForAll = !! waitForAll;
