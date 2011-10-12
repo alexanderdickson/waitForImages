@@ -10,7 +10,7 @@ Licensed under the MIT licenses.
 
 Provides useful callbacks once descendent images have loaded.
 
-waitForImages also supports images references in CSS.
+waitForImages also supports images references in CSS, such as `background-image`.
 
 It can be useful when WebKit incorrectly reports element dimensions/offsets on document ready, because it has not calculated their descendent `img` dimensions yet.
 
@@ -27,12 +27,14 @@ Just provide a callback function and it will be called once all descendent image
     $('selector').waitForImages(function() {
    
         alert('All images are loaded.');
-
+        $(this).slideUp()l   
     });
+
+`this` is a reference to the element that `waitForImages()` is called on.
 
 ###Advanced###
 
-You can pass a second function as a callback. It will be called for each image that is loaded, with some information passed as arguments.
+You can pass a second function as a callback that will be called for each image that is loaded, with some information passed as arguments.
 
     $('selector').waitForImages(function() {
 
@@ -46,7 +48,7 @@ You can pass a second function as a callback. It will be called for each image t
     });
 
 
-You can also set the third argument to true if you'd like the plugin to iterate over all elements, checking for images referenced in the CSS. If it finds any, they will be treated as an image and loaded.
+You can also set the third argument to `true` if you'd like the plugin to iterate over all elements, checking for images referenced in the CSS (by default, it looks at the `background-image`, `listStyleImage`, `borderImage` and `borderCornerImage` properties). If it finds any, they will be treated as an image and loaded.
 
 The callback will be called on the successful **and** unsuccessful loading of the image. Check the third argument to determine the success of the image load. It will be `true` if the image loaded successfully.
 
@@ -67,3 +69,10 @@ You may also set the CSS properties that possibly contain image references yours
     $.waitForImages.hasImgProperties = ['backgroundImage'];
 
 waitForImages also exposes a custom selector, `:uncached`, which when used in conjunction with the `img` selector, allows you to select `img` elements that are not cached already by the browser.
+
+    $('img:uncached').attr('title', 'Loading Image');
+
+##Feedback##
+
+Please use the [Issues](https://github.com/alexanderdickson/waitForImages/issues) for any bugs, feature requests, etc.
+
