@@ -27,7 +27,7 @@ Just provide a callback function and it will be called once all descendent image
     $('selector').waitForImages(function() {
    
         alert('All images are loaded.');
-        $(this).slideUp()l   
+        $(this).slideUp();
     });
 
 `this` is a reference to the element that `waitForImages()` is called on.
