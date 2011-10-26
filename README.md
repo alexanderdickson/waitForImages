@@ -6,6 +6,8 @@ Licensed under the MIT licenses.
 
 [http://www.alexanderdickson.com](http://www.alexanderdickson.com)
 
+[Donate!](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6DLJ39QSQWDGE)
+
 ##Overview##
 
 Provides useful callbacks once descendent images have loaded.
