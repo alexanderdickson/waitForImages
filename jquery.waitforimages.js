@@ -28,10 +28,9 @@
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
     $.expr[':'].uncached = function(obj) {
         // Firefox will always return `true` even if the image has not been downloaded.
-	// Doing it this way works in Firefox.
+        // Doing it this way works in Firefox.
         var img = document.createElement('img');
-        // In firefox, the generated image throws a 404. Lets check first and then assign
-	img.src = img.src !== "undefined" ? img.src : obj.src;
+        img.src = img.src || obj.src // Prevents 404 request if src is undefined.
         return $(obj).is('img[src!=""]') && ! img.complete;
     };
     
