@@ -30,7 +30,7 @@
         // Firefox will always return `true` even if the image has not been downloaded.
         // Doing it this way works in Firefox.
         var img = document.createElement('img');
-        img.src = img.src || obj.src // Prevents 404 request if src is undefined.
+        img.src = (typeof img.src !== undefined) ? img.src : obj.src; // Prevents 404 request if src is undefined.
         return $(obj).is('img[src!=""]') && ! img.complete;
     };
     
