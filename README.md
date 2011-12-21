@@ -1,4 +1,4 @@
-#waitForImages 1.3.4#
+#waitForImages 1.4#
 
 Copyright (c) 2011 Alex Dickson [@alexdickson](http://twitter.com/alexdickson)
 

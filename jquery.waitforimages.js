@@ -1,5 +1,5 @@
 /*
- * waitForImages 1.3.4
+ * waitForImages 1.4
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
  * http://www.alexanderdickson.com/
@@ -27,13 +27,18 @@
     
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
     $.expr[':'].uncached = function(obj) {
-        // Firefox will always return `true` even if the image has not been downloaded.
-	// Doing it this way works in Firefox.
+        // Ensure we are dealing with an `img` element with a valid `src` attribute.
+        if ( ! $(obj).is('img[src!=""]')) {
+            return false;
+        }
+
+        // Firefox's `complete` property will always be`true` even if the image has not been downloaded.
+        // Doing it this way works in Firefox.
         var img = document.createElement('img');
         img.src = obj.src;
-        return $(obj).is('img[src!=""]') && ! img.complete;
+        return ! img.complete;
     };
-    
+
     $.fn.waitForImages = function(finishedCallback, eachCallback, waitForAll) {
 
         // Handle options object.
