@@ -44,7 +44,7 @@ You can pass a second function as a callback that will be called for each image 
 
     }, function(loaded, count, success) {
 
-       alert(loaded + ' of ' + count + ' images has ' + (success ? 'failed to load' : 'loaded') +  '.');
+       alert(loaded + ' of ' + count + ' images has ' + (success ? 'loaded' : 'failed to load') +  '.');
        $(this).addClass('loaded');
 
     });
