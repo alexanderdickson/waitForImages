@@ -24,7 +24,7 @@
         'borderCornerImage'
         ]
     };
-    
+
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
     $.expr[':'].uncached = function(obj) {
         // Ensure we are dealing with an `img` element with a valid `src` attribute.
@@ -71,7 +71,13 @@
                     matchUrl = /url\((['"]?)(.*?)\1\)/g;
                 
                 // Get all elements, as any one of them could have a background image.
-                obj.find('*').each(function() {
+                var elements = obj.find('*');
+
+                // Add container to the elements.
+                elements.push(obj);
+
+                // Process the elements.
+                elements.each(function() {
                     var element = $(this);
 
                     // If an `img` element, add it. But keep iterating in case it has a background image too.
