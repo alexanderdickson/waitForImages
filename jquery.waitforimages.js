@@ -97,12 +97,14 @@
 
                         // Get all url() of this element.
                         var match;
-                        while (match = matchUrl.exec(propertyValue)) {
+                        while ((match = matchUrl.exec(propertyValue)) != null) {
                             allImgs.push({
                                 src: match[2],
                                 element: element[0]
                             });
                         };
+
+                        return false;
                     });
                 });
             } else {
@@ -131,7 +133,7 @@
                 
                 // Handle the image loading and error with the same callback.
                 $(image).bind('load.' + eventNamespace + ' error.' + eventNamespace, function(event) {
-                    allImgsLoaded++;
+                    ++allImgsLoaded;
                     
                     // If an error occurred with loading the image, set the third argument accordingly.
                     eachCallback.call(img.element, allImgsLoaded, allImgsLength, event.type == 'load');
@@ -141,6 +143,7 @@
                         return false;
                     };
                     
+                    return true;
                 });
 
                 image.src = img.src;
