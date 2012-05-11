@@ -24,7 +24,7 @@
         'borderCornerImage'
         ]
     };
-    
+
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
     $.expr[':'].uncached = function(obj) {
         // Ensure we are dealing with an `img` element with a valid `src` attribute.
@@ -71,7 +71,13 @@
                     matchUrl = /url\((['"]?)(.*?)\1\)/g;
                 
                 // Get all elements, as any one of them could have a background image.
-                obj.find('*').each(function() {
+                var elements = obj.find('*');
+
+                // Add container to the elements.
+                elements.push(obj);
+
+                // Process the elements.
+                elements.each(function() {
                     var element = $(this);
 
                     // If an `img` element, add it. But keep iterating in case it has a background image too.
@@ -91,12 +97,14 @@
 
                         // Get all url() of this element.
                         var match;
-                        while (match = matchUrl.exec(propertyValue)) {
+                        while ((match = matchUrl.exec(propertyValue)) != null) {
                             allImgs.push({
                                 src: match[2],
                                 element: element[0]
                             });
                         };
+
+                        return false;
                     });
                 });
             } else {
@@ -125,7 +133,7 @@
                 
                 // Handle the image loading and error with the same callback.
                 $(image).bind('load.' + eventNamespace + ' error.' + eventNamespace, function(event) {
-                    allImgsLoaded++;
+                    ++allImgsLoaded;
                     
                     // If an error occurred with loading the image, set the third argument accordingly.
                     eachCallback.call(img.element, allImgsLoaded, allImgsLength, event.type == 'load');
@@ -135,6 +143,7 @@
                         return false;
                     };
                     
+                    return true;
                 });
 
                 image.src = img.src;
