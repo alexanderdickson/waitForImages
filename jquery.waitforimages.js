@@ -1,11 +1,11 @@
 /*
- * waitForImages 1.4
+ * waitForImages 1.4.1
  * -----------------
  * Provides a callback when all images have loaded in your given selector.
- * http://www.alexanderdickson.com/
+ * http://alexanderdickson.com/
  *
  *
- * Copyright (c) 2011 Alex Dickson
+ * Copyright (c) 2011-2012 Alex Dickson
  * Licensed under the MIT licenses.
  * See website for more info.
  *
@@ -18,10 +18,10 @@
     // CSS properties which contain references to images. 
     $.waitForImages = {
         hasImageProperties: [
-        'backgroundImage',
-        'listStyleImage',
-        'borderImage',
-        'borderCornerImage'
+	        'backgroundImage',
+	        'listStyleImage',
+	        'borderImage',
+	        'borderCornerImage'
         ]
     };
     
@@ -32,7 +32,7 @@
             return false;
         }
 
-        // Firefox's `complete` property will always be`true` even if the image has not been downloaded.
+        // Firefox's `complete` property will always be `true` even if the image has not been downloaded.
         // Doing it this way works in Firefox.
         var img = document.createElement('img');
         img.src = obj.src;
@@ -40,12 +40,15 @@
     };
 
     $.fn.waitForImages = function(finishedCallback, eachCallback, waitForAll) {
+		
+        var allImgsLength = 0;
+        var allImgsLoaded = 0;
 
         // Handle options object.
         if ($.isPlainObject(arguments[0])) {
+            finishedCallback = finishedCallback.finished;
             eachCallback = finishedCallback.each;
             waitForAll = finishedCallback.waitForAll;
-            finishedCallback = finishedCallback.finished;
         }
 
         // Handle missing callbacks.
@@ -56,22 +59,24 @@
         waitForAll = !! waitForAll;
 
         // Ensure callbacks are functions.
-        if (!$.isFunction(finishedCallback) || !$.isFunction(eachCallback)) {
+        if ( ! $.isFunction(finishedCallback) || ! $.isFunction(eachCallback)) {
             throw new TypeError('An invalid callback was supplied.');
-        };
+        }
 
         return this.each(function() {
             // Build a list of all imgs, dependent on what images will be considered.
-            var obj = $(this),
-                allImgs = [];
+            var obj = $(this);
+			var allImgs = [];
+            // CSS properties which may contain an image.
+            var hasImgProperties = $.waitForImages.hasImageProperties || [];
+			// To match `url()` references.
+			// Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
+            var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
 
             if (waitForAll) {
-                // CSS properties which may contain an image.
-                var hasImgProperties = $.waitForImages.hasImageProperties || [],
-                    matchUrl = /url\((['"]?)(.*?)\1\)/g;
                 
-                // Get all elements, as any one of them could have a background image.
-                obj.find('*').each(function() {
+                // Get all elements (including the original), as any one of them could have a background image.
+                obj.find('*').andSelf().each(function() {
                     var element = $(this);
 
                     // If an `img` element, add it. But keep iterating in case it has a background image too.
@@ -84,13 +89,14 @@
 
                     $.each(hasImgProperties, function(i, property) {
                         var propertyValue = element.css(property);
+						var match;
+						
                         // If it doesn't contain this property, skip.
                         if ( ! propertyValue) {
                             return true;
                         }
 
                         // Get all url() of this element.
-                        var match;
                         while (match = matchUrl.exec(propertyValue)) {
                             allImgs.push({
                                 src: match[2],
@@ -111,13 +117,13 @@
                 });
             };
 
-            var allImgsLength = allImgs.length,
-                allImgsLoaded = 0;
+            allImgsLength = allImgs.length;
+            allImgsLoaded = 0;
 
             // If no images found, don't bother.
             if (allImgsLength == 0) {
                 finishedCallback.call(obj[0]);
-            };
+            }
 
             $.each(allImgs, function(i, img) {
                 
@@ -141,4 +147,4 @@
             });
         });
     };
-})(jQuery);
+})(jQuery)

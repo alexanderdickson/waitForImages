@@ -1,10 +1,10 @@
-#waitForImages 1.4#
+#waitForImages 1.4.1#
 
-Copyright (c) 2011 Alex Dickson [@alexdickson](http://twitter.com/alexdickson)
+Copyright (c) 2011-2012 Alex Dickson [@alexdickson](http://twitter.com/alexdickson)
 
 Licensed under the MIT licenses.
 
-[http://www.alexanderdickson.com](http://www.alexanderdickson.com)
+[http://alexanderdickson.com](http://alexanderdickson.com)
 
 [Donate!](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6DLJ39QSQWDGE)
 
@@ -30,6 +30,7 @@ Just provide a callback function and it will be called once all descendent image
    
         alert('All images are loaded.');
         $(this).slideUp();
+		
     });
 
 `this` is a reference to the element that `waitForImages()` is called on.
