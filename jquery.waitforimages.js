@@ -46,9 +46,9 @@
 
         // Handle options object.
         if ($.isPlainObject(arguments[0])) {
-            finishedCallback = finishedCallback.finished;
-            eachCallback = finishedCallback.each;
-            waitForAll = finishedCallback.waitForAll;
+            finishedCallback = arguments[0].finished;
+            eachCallback = arguments[0].each;
+            waitForAll = arguments[0].waitForAll;
         }
 
         // Handle missing callbacks.
