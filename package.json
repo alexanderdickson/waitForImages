@@ -5,9 +5,10 @@
     "node": ">= 0.6.0"
   },
   "scripts": {
-    "test": "grunt qunit"
+    "test": "grunt travis --verbose"
   },
   "devDependencies": {
-    "grunt": "~0.3.16"
+    "grunt": "~0.3.16",
+	
   }
 }
