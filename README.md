@@ -2,11 +2,16 @@
 
 Copyright (c) 2011-2012 Alex Dickson [@alexdickson](http://twitter.com/alexdickson)
 
-Licensed under the MIT licenses.
+Licensed under the [MIT licenses](https://raw.github.com/alexanderdickson/waitForImages/master/dist/LICENSE-MIT).
 
 [http://alexanderdickson.com](http://alexanderdickson.com)
 
 [Donate!](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6DLJ39QSQWDGE)
+
+##Download##
+
+- [Minified](https://raw.github.com/alexanderdickson/waitForImages/master/dist/waitForImages.min.js)
+- [Unminified](https://raw.github.com/alexanderdickson/waitForImages/master/dist/waitForImages.js)
 
 ##Overview##
 
@@ -18,7 +23,9 @@ It can be useful when WebKit incorrectly reports element dimensions/offsets on d
 
 ##Thanks##
 
-[Matt Scharley](https://github.com/mscharley).
+- [Matt Scharley](https://github.com/mscharley)
+- [Astletron](https://github.com/astletron)
+- [Zerkms](https://github.com/zerkms)
 
 ##Usage##
 
