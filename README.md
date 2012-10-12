@@ -10,8 +10,8 @@ Licensed under the [MIT licenses](https://raw.github.com/alexanderdickson/waitFo
 
 ##Download##
 
-- [Minified](https://raw.github.com/alexanderdickson/waitForImages/master/dist/waitForImages.min.js)
-- [Unminified](https://raw.github.com/alexanderdickson/waitForImages/master/dist/waitForImages.js)
+- [Production (minified)](https://raw.github.com/alexanderdickson/waitForImages/master/dist/jquery.waitforimages.min.js)
+- [Development (unminified)](https://raw.github.com/alexanderdickson/waitForImages/master/dist/jquery.waitforimages.js)
 
 ##Overview##
 
