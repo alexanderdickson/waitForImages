@@ -6,7 +6,8 @@ Licensed under the [MIT licenses](https://raw.github.com/alexanderdickson/waitFo
 
 [http://alexanderdickson.com](http://alexanderdickson.com)
 
-[Donate!](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6DLJ39QSQWDGE)
+[![Donate](http://www.pledgie.com/campaigns/18572.png?skin_name=chrome)](http://www.pledgie.com/campaigns/18572)
+
 
 [![Build Status](https://secure.travis-ci.org/alexanderdickson/waitForImages.png)](http://travis-ci.org/alexanderdickson/waitForImages)
 
