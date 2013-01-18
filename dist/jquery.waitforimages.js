@@ -1,12 +1,12 @@
-/*! waitForImages jQuery Plugin - v1.4.1 - 2012-10-12
+/*! waitForImages jQuery Plugin - v1.4.2 - 2013-01-19
 * https://github.com/alexanderdickson/waitForImages
-* Copyright (c) 2012 Alex Dickson; Licensed MIT */
+* Copyright (c) 2013 Alex Dickson; Licensed MIT */
 
 (function ($) {
     // Namespace all events.
     var eventNamespace = 'waitForImages';
 
-    // CSS properties which contain references to images. 
+    // CSS properties which contain references to images.
     $.waitForImages = {
         hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage']
     };
@@ -32,9 +32,11 @@
 
         // Handle options object.
         if ($.isPlainObject(arguments[0])) {
-            finishedCallback = arguments[0].finished;
-            eachCallback = arguments[0].each;
             waitForAll = arguments[0].waitForAll;
+            eachCallback = arguments[0].each;
+			// This must be last as arguments[0]
+			// is aliased with finishedCallback.
+            finishedCallback = arguments[0].finished;
         }
 
         // Handle missing callbacks.

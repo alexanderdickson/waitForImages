@@ -2,7 +2,7 @@
   "name": "jquery.waitforimages",
   "title": "waitForImages jQuery Plugin",
   "description": "A jQuery plugin that lets you attach callbacks to useful image loading events.",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "homepage": "https://github.com/alexanderdickson/waitForImages",
   "author": {
     "name": "Alex Dickson",

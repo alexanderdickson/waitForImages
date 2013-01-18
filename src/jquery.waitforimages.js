@@ -1,17 +1,17 @@
 /*
- * waitForImages 1.4.1
+ * waitForImages 1.4.2
  * -------------------
  * Provides a callback when all images have loaded in your given selector.
  * https://github.com/alexanderdickson/waitForImages
  *
- * Copyright (c) 2012 Alex Dickson
+ * Copyright (c) 2013 Alex Dickson
  * Licensed under the MIT license.
  */
 (function ($) {
     // Namespace all events.
     var eventNamespace = 'waitForImages';
 
-    // CSS properties which contain references to images. 
+    // CSS properties which contain references to images.
     $.waitForImages = {
         hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage']
     };
@@ -37,9 +37,11 @@
 
         // Handle options object.
         if ($.isPlainObject(arguments[0])) {
-            finishedCallback = arguments[0].finished;
-            eachCallback = arguments[0].each;
             waitForAll = arguments[0].waitForAll;
+            eachCallback = arguments[0].each;
+			// This must be last as arguments[0]
+			// is aliased with finishedCallback.
+            finishedCallback = arguments[0].finished;
         }
 
         // Handle missing callbacks.
