@@ -122,7 +122,9 @@
                 var image = new Image();
 
                 // Handle the image loading and error with the same callback.
-                $(image).bind('load.' + eventNamespace + ' error.' + eventNamespace, function (event) {
+                var eventName = 'load.' + eventNamespace + ' error.' + eventNamespace;
+                var $image = $(image)
+                $image.bind(eventName, function (event) {
                     allImgsLoaded++;
 
                     // If an error occurred with loading the image, set the third argument accordingly.
@@ -130,6 +132,7 @@
 
                     if (allImgsLoaded == allImgsLength) {
                         finishedCallback.call(obj[0]);
+                        $image.unbind(eventName)
                         return false;
                     }
 
