@@ -2,7 +2,7 @@
   "title": "waitForImages jQuery Plugin",
   "name": "jquery.waitforimages",
   "author": "Alexander Dickson",
-  "version": "1.5",
+  "version": "1.5.0",
   "homepage": "https://github.com/alexanderdickson/waitForImages",
   "bugs": {
     "url": "https://github.com/alexanderdickson/waitForImages/issues"
@@ -20,11 +20,7 @@
   "scripts": {
     "test": "grunt travis --verbose"
   },
-  "dependencies": {
-    "jquery": ">=1.9"
-  },
   "devDependencies": {
-    "grunt": "~0.4.1",
     "grunt-cli": "~0.1.6",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-qunit": "~0.2.2",
