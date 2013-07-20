@@ -1,19 +1,10 @@
-/*
- * waitForImages 1.4.2
- * -------------------
- * Provides a callback when all images have loaded in your given selector.
- * https://github.com/alexanderdickson/waitForImages
- *
- * Copyright (c) 2013 Alex Dickson
- * Licensed under the MIT license.
- */
-(function ($) {
+;(function ($) {
     // Namespace all events.
     var eventNamespace = 'waitForImages';
 
     // CSS properties which contain references to images.
     $.waitForImages = {
-        hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage']
+        hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage', 'cursor']
     };
 
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
@@ -69,7 +60,7 @@
             if (waitForAll) {
 
                 // Get all elements (including the original), as any one of them could have a background image.
-                obj.find('*').andSelf().each(function () {
+                obj.find('*').addBack().each(function () {
                     var element = $(this);
 
                     // If an `img` element, add it. But keep iterating in case it has a background image too.
@@ -122,7 +113,7 @@
                 var image = new Image();
 
                 // Handle the image loading and error with the same callback.
-                $(image).bind('load.' + eventNamespace + ' error.' + eventNamespace, function (event) {
+                $(image).on('load.' + eventNamespace + ' error.' + eventNamespace, function (event) {
                     allImgsLoaded++;
 
                     // If an error occurred with loading the image, set the third argument accordingly.
