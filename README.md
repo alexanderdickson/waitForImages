@@ -19,17 +19,23 @@ waitForImages also supports images referenced in CSS, such as the `background-im
 
 It can be useful when WebKit incorrectly reports element dimensions/offsets on document ready, because it has not calculated their descendant `img` dimensions yet.
 
-##Download##
+
+##Get it##
+
+You can either grab the source yourself...
 
 - [Production (minified)](https://raw.github.com/alexanderdickson/waitForImages/master/dist/jquery.waitforimages.min.js)
 - [Development (unminified)](https://raw.github.com/alexanderdickson/waitForImages/master/dist/jquery.waitforimages.js)
 
+...or you can use a hosted version...
+
+- [Hosted on CDNJS (minified)](http://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js)
 
 ##Usage##
 
 ###Standard###
 
-Just provide a callback function and it will be called once all descendent images have loaded.
+Just provide a callback function and it will be called once all descendant images have loaded.
 
     $('selector').waitForImages(function() {
 		// All descendant images have loaded, now slide up.
