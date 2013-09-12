@@ -10,7 +10,7 @@
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
     $.expr[':'].uncached = function (obj) {
         // Ensure we are dealing with an `img` element with a valid `src` attribute.
-        if (!$(obj).is('img[src!=""]')) {
+        if (!$(obj).is('img[src][src!=""]')) {
             return false;
         }
 
