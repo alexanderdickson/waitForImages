@@ -55,7 +55,7 @@ You can pass a second function as a callback that will be called for each image 
        $(this).addClass('loaded');
     });
 	
-You can also set the third argument to `true` if you'd like the plugin to iterate over the colleciton and all descendent elements, checking for images referenced in the CSS (by default, it looks at the `background-image`, `list-style-image`, `border-image` and `border-corner-image` properties). If it finds any, they will be treated as a descendant image.
+You can also set the third argument to `true` if you'd like the plugin to iterate over the collection and all descendent elements, checking for images referenced in the CSS (by default, it looks at the `background-image`, `list-style-image`, `border-image` and `border-corner-image` properties). If it finds any, they will be treated as a descendant image.
 
 The callback will be called on the successful **and** unsuccessful loading of the image. Check the third argument to determine the success of the image load. It will be `true` if the image loaded successfully.
 
