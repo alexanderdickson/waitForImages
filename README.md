@@ -31,6 +31,8 @@ You can either grab the source yourself...
 
 - [Hosted on CDNJS (minified)](http://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js)
 
+Of course, these need to be loaded after `jQuery` is made available. The current version supports >= jQuery 1.8. If you find incompatibility issues, please check out a previous tagged version.
+
 ##Usage##
 
 ###Standard###
