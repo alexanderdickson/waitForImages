@@ -2,7 +2,7 @@
   "title": "waitForImages jQuery Plugin",
   "name": "jquery.waitforimages",
   "author": "Alexander Dickson",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "homepage": "https://github.com/alexanderdickson/waitForImages",
   "bugs": {
     "url": "https://github.com/alexanderdickson/waitForImages/issues"
