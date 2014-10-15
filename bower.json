@@ -1,0 +1,25 @@
+{
+  "name": "waitForImages",
+  "version": "1.5",
+  "homepage": "https://github.com/alexanderdickson/waitForImages",
+  "authors": [
+    "Alex Dickson <alex@alexanderdickson.com>"
+  ],
+  "description": "Provides callbacks for image loading events",
+  "main": "src/jquery.waitforimages.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "jquery",
+    "images"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
