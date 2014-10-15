@@ -1,6 +1,6 @@
-/*! waitForImages jQuery Plugin - v1.5.0 - 2013-07-20
+/*! waitForImages jQuery Plugin - v1.6.0 - 2014-10-15
 * https://github.com/alexanderdickson/waitForImages
-* Copyright (c) 2013 Alex Dickson; Licensed MIT */
+* Copyright (c) 2014 Alex Dickson; Licensed MIT */
 ;(function ($) {
     // Namespace all events.
     var eventNamespace = 'waitForImages';
@@ -13,7 +13,7 @@
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
     $.expr[':'].uncached = function (obj) {
         // Ensure we are dealing with an `img` element with a valid `src` attribute.
-        if (!$(obj).is('img[src!=""]')) {
+        if (!$(obj).is('img[src][src!=""]')) {
             return false;
         }
 
