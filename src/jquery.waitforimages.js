@@ -111,13 +111,17 @@
             $.each(allImgs, function (i, img) {
 
                 var image = new Image();
+                var events = 'load.' + eventNamespace + ' error.' + eventNamespace;
 
                 // Handle the image loading and error with the same callback.
-                $(image).on('load.' + eventNamespace + ' error.' + eventNamespace, function (event) {
+                $(image).on(events, function me (event) {
                     allImgsLoaded++;
 
                     // If an error occurred with loading the image, set the third argument accordingly.
                     eachCallback.call(img.element, allImgsLoaded, allImgsLength, event.type == 'load');
+
+                    // Unbind the event listener.
+                    $(this).off(events, me);
 
                     if (allImgsLoaded == allImgsLength) {
                         finishedCallback.call(obj[0]);
