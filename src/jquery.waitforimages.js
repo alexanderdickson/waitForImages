@@ -105,7 +105,8 @@
                         attributeValues = attributeValue.split(',');
 
                         $.each(attributeValues, function(i, value){
-                            value = $.trim(value);
+                            // Trim value and get string before first whitespace (for use with srcset)
+                            value = $.trim(value).split(' ')[0];
                             allImgs.push({
                                 src: value,
                                 element: element[0]
