@@ -1,6 +1,6 @@
 {
   "name": "waitForImages",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "homepage": "https://github.com/alexanderdickson/waitForImages",
   "authors": [
     "Alex Dickson <alex@alexanderdickson.com>"
@@ -23,6 +23,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~1.8"
+    "jquery": "~2.1"
   }
 }
