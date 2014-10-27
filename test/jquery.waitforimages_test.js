@@ -5,6 +5,7 @@
 
     var IMG_ELEMENTS = 1;
     var DIV_ELEMENTS = 1;
+    var ATTR_ELEMENTS = 1;
 
     var getImageUrl = function() {
 		return "about:";
@@ -29,6 +30,12 @@
                     css: {
                         background: "url(" + getImageUrl() + ")"
                     }
+                }).appendTo(this.container);
+            }
+
+            for (i = 0; i < ATTR_ELEMENTS; i++) {
+                $("<div />", {
+                    "srcset": getImageUrl() + " 2x"
                 }).appendTo(this.container);
             }
 			
@@ -102,7 +109,7 @@
 
     }); 
 	
-    module("Img Elements & Elements with CSS Backgrounds", setup);
+    module("Img Elements, Elements with CSS Backgrounds & Elements with attributes", setup);
 
     asyncTest("Finished Callback", function() {
 		
@@ -120,7 +127,7 @@
 
     asyncTest("Each Callback", function() {
 		
-		expect(4 * (IMG_ELEMENTS + DIV_ELEMENTS + 1) + 1);
+		expect(4 * (IMG_ELEMENTS + DIV_ELEMENTS + ATTR_ELEMENTS + 1) + 1);
 
 		var self = this;
 

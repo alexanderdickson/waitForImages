@@ -5,7 +5,7 @@
     // CSS properties which contain references to images.
     $.waitForImages = {
         hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage', 'cursor'],
-        hasImageAttributes: ['data-img']
+        hasImageAttributes: ['srcset']
     };
 
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.

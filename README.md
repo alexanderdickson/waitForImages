@@ -15,7 +15,7 @@ Licensed under the [MIT licenses](https://raw.github.com/alexanderdickson/waitFo
 
 Provides useful callbacks once descendant images have loaded.
 
-waitForImages also supports both images referenced in CSS, such as the `background-image` property, and images referenced in element attributes such as `data-img`. Images referenced in attributes can also be a comma-separated list of images.
+waitForImages also supports both images referenced in CSS, such as the `background-image` property, and images referenced in element attributes such as `srcset`. Images referenced in attributes can also be a comma-separated list of images.
 
 It can be useful when WebKit incorrectly reports element dimensions/offsets on document ready, because it has not calculated their descendant `img` dimensions yet.
 
