@@ -1,4 +1,4 @@
-/*! waitForImages jQuery Plugin - v1.6.4 - 2014-10-27
+/*! waitForImages jQuery Plugin - v1.7 - 2014-11-06
 * https://github.com/alexanderdickson/waitForImages
 * Copyright (c) 2014 Alex Dickson; Licensed MIT */
 ;(function ($) {
@@ -7,7 +7,8 @@
 
     // CSS properties which contain references to images.
     $.waitForImages = {
-        hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage', 'cursor']
+        hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage', 'cursor'],
+        hasImageAttributes: ['srcset']
     };
 
     // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
@@ -56,6 +57,8 @@
             var allImgs = [];
             // CSS properties which may contain an image.
             var hasImgProperties = $.waitForImages.hasImageProperties || [];
+            // Element attributes which may contain an image.
+            var hasImageAttributes = $.waitForImages.hasImageAttributes || [];
             // To match `url()` references.
             // Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
             var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
@@ -90,6 +93,28 @@
                                 element: element[0]
                             });
                         }
+                    });
+
+                    $.each(hasImageAttributes, function (i, attribute) {
+                        var attributeValue = element.attr(attribute);
+                        var attributeValues;
+
+                        // If it doesn't contain this property, skip.
+                        if (!attributeValue) {
+                            return true;
+                        }
+
+                        // Check for multiple comma separated images
+                        attributeValues = attributeValue.split(',');
+
+                        $.each(attributeValues, function(i, value) {
+                            // Trim value and get string before first whitespace (for use with srcset)
+                            value = $.trim(value).split(' ')[0];
+                            allImgs.push({
+                                src: value,
+                                element: element[0]
+                            });
+                        });
                     });
                 });
             } else {
