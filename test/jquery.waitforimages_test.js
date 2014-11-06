@@ -35,7 +35,7 @@
 
             for (i = 0; i < ATTR_ELEMENTS; i++) {
                 $("<div />", {
-                    "srcset": getImageUrl() + " 2x"
+                    srcset: getImageUrl() + " 2x"
                 }).appendTo(this.container);
             }
 			
