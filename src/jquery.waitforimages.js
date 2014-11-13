@@ -4,36 +4,60 @@
 
     // CSS properties which contain references to images.
     $.waitForImages = {
-        hasImageProperties: ['backgroundImage', 'listStyleImage', 'borderImage', 'borderCornerImage', 'cursor'],
+        hasImageProperties: [
+            'backgroundImage',
+            'listStyleImage',
+            'borderImage',
+            'borderCornerImage',
+            'cursor'
+        ],
         hasImageAttributes: ['srcset']
     };
 
-    // Custom selector to find `img` elements that have a valid `src` attribute and have not already loaded.
+    // Custom selector to find `img` elements that have a valid `src`
+    // attribute and have not already loaded.
     $.expr[':'].uncached = function (obj) {
-        // Ensure we are dealing with an `img` element with a valid `src` attribute.
+        // Ensure we are dealing with an `img` element with a valid
+        // `src` attribute.
         if (!$(obj).is('img[src][src!=""]')) {
             return false;
         }
 
-        // Firefox's `complete` property will always be `true` even if the image has not been downloaded.
-        // Doing it this way works in Firefox.
+        // Firefox's `complete` property will always be `true` even if the
+        // image has not been downloaded. Doing it this way works in Firefox.
         var img = new Image();
         img.src = obj.src;
         return !img.complete;
     };
 
-    $.fn.waitForImages = function (finishedCallback, eachCallback, waitForAll) {
+    $.fn.waitForImages = function () {
 
         var allImgsLength = 0;
         var allImgsLoaded = 0;
+        var deferred = $.Deferred();
 
-        // Handle options object.
+        var finishedCallback;
+        var eachCallback;
+        var waitForAll;
+
+        // Handle options object (if passed).
         if ($.isPlainObject(arguments[0])) {
+
             waitForAll = arguments[0].waitForAll;
             eachCallback = arguments[0].each;
-			// This must be last as arguments[0]
-			// is aliased with finishedCallback.
             finishedCallback = arguments[0].finished;
+
+        } else {
+
+            // Handle if using deferred object and only one param was passed in.
+            if (arguments.length === 1 && $.type(arguments[0]) === 'boolean') {
+                waitForAll = arguments[0];
+            } else {
+                finishedCallback = arguments[0];
+                eachCallback = arguments[1];
+                waitForAll = arguments[2];
+            }
+
         }
 
         // Handle missing callbacks.
@@ -48,8 +72,9 @@
             throw new TypeError('An invalid callback was supplied.');
         }
 
-        return this.each(function () {
-            // Build a list of all imgs, dependent on what images will be considered.
+        this.each(function () {
+            // Build a list of all imgs, dependent on what images will
+            // be considered.
             var obj = $(this);
             var allImgs = [];
             // CSS properties which may contain an image.
@@ -62,11 +87,13 @@
 
             if (waitForAll) {
 
-                // Get all elements (including the original), as any one of them could have a background image.
+                // Get all elements (including the original), as any one of
+                // them could have a background image.
                 obj.find('*').addBack().each(function () {
                     var element = $(this);
 
-                    // If an `img` element, add it. But keep iterating in case it has a background image too.
+                    // If an `img` element, add it. But keep iterating in
+                    // case it has a background image too.
                     if (element.is('img:uncached')) {
                         allImgs.push({
                             src: element.attr('src'),
@@ -105,7 +132,8 @@
                         attributeValues = attributeValue.split(',');
 
                         $.each(attributeValues, function(i, value) {
-                            // Trim value and get string before first whitespace (for use with srcset)
+                            // Trim value and get string before first
+                            // whitespace (for use with srcset).
                             value = $.trim(value).split(' ')[0];
                             allImgs.push({
                                 src: value,
@@ -131,25 +159,37 @@
             // If no images found, don't bother.
             if (allImgsLength === 0) {
                 finishedCallback.call(obj[0]);
+                deferred.resolveWith(obj[0]);
             }
 
             $.each(allImgs, function (i, img) {
 
                 var image = new Image();
-                var events = 'load.' + eventNamespace + ' error.' + eventNamespace;
+                var events =
+                  'load.' + eventNamespace + ' error.' + eventNamespace;
 
                 // Handle the image loading and error with the same callback.
-                $(image).on(events, function me (event) {
+                $(image).one(events, function me (event) {
+                    // If an error occurred with loading the image, set the
+                    // third argument accordingly.
+                    var eachArguments = [
+                        allImgsLoaded,
+                        allImgsLength,
+                        event.type == 'load'
+                    ];
                     allImgsLoaded++;
 
-                    // If an error occurred with loading the image, set the third argument accordingly.
-                    eachCallback.call(img.element, allImgsLoaded, allImgsLength, event.type == 'load');
+                    eachCallback.apply(img.element, eachArguments);
+                    deferred.notifyWith(img.element, eachArguments);
 
-                    // Unbind the event listener.
+                    // Unbind the event listeners. I use this in addition to
+                    // `one` as one of those events won't be called (either
+                    // 'load' or 'error' will be called).
                     $(this).off(events, me);
 
                     if (allImgsLoaded == allImgsLength) {
                         finishedCallback.call(obj[0]);
+                        deferred.resolveWith(obj[0]);
                         return false;
                     }
 
@@ -158,5 +198,8 @@
                 image.src = img.src;
             });
         });
+
+        return deferred.promise();
+
     };
 }(jQuery));

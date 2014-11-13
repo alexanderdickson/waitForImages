@@ -35,6 +35,8 @@ Of course, these need to be loaded after `jQuery` is made available. The current
 
 ##Usage##
 
+There are two ways to use waitForImages: with a standard callback system (previously the only API) or receiving a promise.
+
 ###Standard###
 
 Just provide a callback function and it will be called once all descendant images have loaded.
@@ -46,7 +48,16 @@ $('selector').waitForImages(function() {
 });
 ```
 
-`this` is a reference to the collection that `waitForImages()` was called on.
+You can also use the jQuery promise API.
+
+```javascript
+$('selector').waitForImages().done(function() {
+    // All descendant images have loaded, now slide up.
+    $(this).slideUp();
+});
+```
+
+In the callbacks, `this` is a reference to the collection that `waitForImages()` was called on.
 
 ###Advanced###
 
@@ -61,7 +72,16 @@ $('selector').waitForImages(function() {
 });
 ```
 
-You can also set the third argument to `true` if you'd like the plugin to iterate over the collection and all descendent elements, checking for images referenced in the CSS (by default, it looks at the `background-image`, `list-style-image`, `border-image` and `border-corner-image` properties). If it finds any, they will be treated as a descendant image.
+Using the jQuery promises API, you can then use the `progress()` method to know when an individual image has been loaded.
+
+```javascript
+$('selector').waitForImages().progress(function(loaded, count, success) {
+   alert(loaded + ' of ' + count + ' images has ' + (success ? 'loaded' : 'failed to load') +  '.');
+   $(this).addClass('loaded');
+});
+```
+
+You can also set the third argument to `true` if you'd like the plugin to iterate over the collection and all descendent elements, checking for images referenced in the CSS (by default, it looks at the `background-image`, `list-style-image`, `border-image`, `border-corner-image` and `cursor` properties). If it finds any, they will be treated as a descendant image.
 
 The callback will be called on the successful **and** unsuccessful loading of the image. Check the third argument to determine the success of the image load. It will be `true` if the image loaded successfully.
 
@@ -76,6 +96,14 @@ $('selector').waitForImages({
        // ...
     },
     waitForAll: true
+});
+```
+
+To use this with the promise API, simply pass one argument, which is `waitForAll`.
+
+```javascript
+$('selector').waitForImages(true).done(function() {
+    // ...
 });
 ```
 

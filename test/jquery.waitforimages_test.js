@@ -13,9 +13,9 @@
 
     var setup = {
         setup: function() {
-			
+
 			var i;
-			
+
 			this.container = $("<div />").appendTo("#qunit-fixture");
 
             for (i = 0; i < IMG_ELEMENTS; i++) {
@@ -38,9 +38,9 @@
                     srcset: getImageUrl() + " 2x"
                 }).appendTo(this.container);
             }
-			
+
 			this.container.css("background", "url(" + getImageUrl() + ")");
-			
+
         },
 
         teardown: function() {
@@ -51,11 +51,11 @@
     module("Argument checking", setup);
 
     test("Check Callbacks", function() {
-		
+
 		expect(4);
-		
+
 		var self = this;
-		
+
         raises(function() {
 			self.container.waitForImages("string");
         }, TypeError, "Finished Callback is function as argument");
@@ -77,18 +77,31 @@
         }, TypeError, "Each callback is function as passed in object");
 
     });
-	
+
 
     module("Img Elements", setup);
 
     asyncTest("Finished Callback", function() {
-				
+
 		expect(2);
-		
+
 		var self = this;
 
         this.container.waitForImages(function() {
-            equal(this, self.container[0], "Assert `this` is set correctly.");		
+            equal(this, self.container[0], "Assert `this` is set correctly.");
+            ok(true, "Assert callback called.");
+            start();
+        });
+
+    });
+
+    asyncTest("Finished Promise", function() {
+
+        expect(2);
+
+        var self = this;
+        this.container.waitForImages().done(function() {
+            equal(this, self.container[0], "Assert `this` is set correctly.");
             ok(true, "Assert callback called.");
             start();
         });
@@ -96,9 +109,9 @@
     });
 
     asyncTest("Each Callback", function() {
-		
-		expect(4 * IMG_ELEMENTS);	
-		
+
+		expect(4 * IMG_ELEMENTS);
+
         this.container.waitForImages($.noop, function(loaded, count, success) {
             ok($(this).is("img"), "Assert `this` is an `img` element.");
             ok(loaded <= count, "Assert loaded count is never larger than the count.");
@@ -107,14 +120,28 @@
             start();
         });
 
-    }); 
-	
-    module("Img Elements, Elements with CSS Backgrounds & Elements with attributes", setup);
+    });
+
+    asyncTest("Each Promise", function() {
+
+        expect(4 * IMG_ELEMENTS);
+
+        this.container.waitForImages().progress(function(loaded, count, success) {
+            ok($(this).is("img"), "Assert `this` is an `img` element.");
+            ok(loaded <= count, "Assert loaded count is never larger than the count.");
+            ok(typeof success == "boolean", "Assert `success` argument is a Boolean.");
+            ok(true, "Assert callback called.");
+            start();
+        });
+
+    });
+
+    module("Img Elements, Elements with CSS Backgrounds & Elements with Attributes", setup);
 
     asyncTest("Finished Callback", function() {
-		
+
 		expect(2);
-		
+
 		var self = this;
 
         this.container.waitForImages(function() {
@@ -123,10 +150,24 @@
             start();
         }, $.noop, true);
 
-    }); 
+    });
+
+    asyncTest("Finished Promise", function() {
+
+        expect(2);
+
+        var self = this;
+
+        this.container.waitForImages(true).done(function() {
+            equal(this, self.container[0], "Assert `this` is set correctly.");
+            ok(true, "Assert callback called.");
+            start();
+        });
+
+    });
 
     asyncTest("Each Callback", function() {
-		
+
 		expect(4 * (IMG_ELEMENTS + DIV_ELEMENTS + ATTR_ELEMENTS + 1) + 1);
 
 		var self = this;
@@ -135,7 +176,27 @@
 			if (this === self.container[0]) {
 				ok(true, "Assert container element is checked.");
 			}
-				
+
+            ok($(this).filter("*").length, "Assert `this` is an element.");
+            ok(loaded <= count, "Assert loaded count is never larger than the count.");
+            ok(typeof success == "boolean", "Assert `success` argument is a Boolean.");
+            ok(true, "Assert callback called.");
+            start();
+        }, true);
+
+    });
+
+    asyncTest("Each Promise", function() {
+
+        expect(4 * (IMG_ELEMENTS + DIV_ELEMENTS + ATTR_ELEMENTS + 1) + 1);
+
+        var self = this;
+
+        this.container.waitForImages(true).progress(function(loaded, count, success) {
+            if (this === self.container[0]) {
+                ok(true, "Assert container element is checked.");
+            }
+
             ok($(this).filter("*").length, "Assert `this` is an element.");
             ok(loaded <= count, "Assert loaded count is never larger than the count.");
             ok(typeof success == "boolean", "Assert `success` argument is a Boolean.");
