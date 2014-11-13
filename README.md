@@ -19,6 +19,7 @@ waitForImages also supports both images referenced in CSS, such as the `backgrou
 
 It can be useful when WebKit incorrectly reports element dimensions/offsets on document ready, because it has not calculated their descendant `img` dimensions yet.
 
+Supports all browsers you probably care about.
 
 ##Get it##
 
@@ -30,6 +31,12 @@ You can either grab the source yourself...
 ...or you can use a hosted version...
 
 - [Hosted on CDNJS (minified)](http://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js)
+
+Alternatively, you can install with [`bower`](http://bower.io/).
+
+```bash
+bower install waitForImages
+```
 
 Of course, these need to be loaded after `jQuery` is made available. The current version supports >= jQuery 1.8. If you find incompatibility issues, please check out a previous tagged version.
 
