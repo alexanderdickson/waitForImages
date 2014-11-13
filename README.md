@@ -39,10 +39,12 @@ Of course, these need to be loaded after `jQuery` is made available. The current
 
 Just provide a callback function and it will be called once all descendant images have loaded.
 
-    $('selector').waitForImages(function() {
-        // All descendant images have loaded, now slide up.
-        $(this).slideUp();
-    });
+```javascript
+$('selector').waitForImages(function() {
+    // All descendant images have loaded, now slide up.
+    $(this).slideUp();
+});
+```
 
 `this` is a reference to the collection that `waitForImages()` was called on.
 
@@ -50,12 +52,14 @@ Just provide a callback function and it will be called once all descendant image
 
 You can pass a second function as a callback that will be called for each image that is loaded, with some information passed as arguments.
 
-    $('selector').waitForImages(function() {
-        alert('All images have loaded.');
-    }, function(loaded, count, success) {
-       alert(loaded + ' of ' + count + ' images has ' + (success ? 'loaded' : 'failed to load') +  '.');
-       $(this).addClass('loaded');
-    });
+```javascript
+$('selector').waitForImages(function() {
+    alert('All images have loaded.');
+}, function(loaded, count, success) {
+   alert(loaded + ' of ' + count + ' images has ' + (success ? 'loaded' : 'failed to load') +  '.');
+   $(this).addClass('loaded');
+});
+```
 
 You can also set the third argument to `true` if you'd like the plugin to iterate over the collection and all descendent elements, checking for images referenced in the CSS (by default, it looks at the `background-image`, `list-style-image`, `border-image` and `border-corner-image` properties). If it finds any, they will be treated as a descendant image.
 
@@ -63,32 +67,32 @@ The callback will be called on the successful **and** unsuccessful loading of th
 
 If you want to skip the first argument, pass `$.noop` or alternatively, pass an object literal to the plugin, instead of the arguments individually.
 
-    $('selector').waitForImages({
-        finished: function() {
-            // ...
-        },
-        each: function() {
-           // ...
-        },
-        waitForAll: true
-    });
+```javascript
+$('selector').waitForImages({
+    finished: function() {
+        // ...
+    },
+    each: function() {
+       // ...
+    },
+    waitForAll: true
+});
+```
 
 You may also set the CSS properties that possibly contain image references yourself. Just assign an array of properties to the plugin.
 
-    $.waitForImages.hasImgProperties = ['backgroundImage'];
+```javascript
+$.waitForImages.hasImgProperties = ['backgroundImage'];
+```
 
 waitForImages also exposes a custom selector, `:uncached`, which when used in conjunction with the `img` selector, allows you to select `img` elements that are not cached already by the browser.
 
-    $('img:uncached').attr('title', 'Loading Image');
-
-##Thanks##
-
-- [Matt Scharley](https://github.com/mscharley)
-- [Astletron](https://github.com/astletron)
-- [Zerkms](https://github.com/zerkms)
-
+```javascript
+$('img:uncached').attr('title', 'Loading Image');
+```
 
 ##Feedback##
 
 Please use the [Issues](https://github.com/alexanderdickson/waitForImages/issues) for any bugs, feature requests, etc.
 
+If you're having problems using the plugin, [ask a question on Stack Overflow](http://stackoverflow.com/questions/tagged/waitforimages).
