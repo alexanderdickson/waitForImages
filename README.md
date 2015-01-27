@@ -1,6 +1,6 @@
 #waitForImages#
 
-Copyright (c) 2011-2014 Alex Dickson [@alexdickson](http://twitter.com/alexdickson)
+Copyright (c) 2011-2015 Alex Dickson [@alexdickson](http://twitter.com/alexdickson)
 
 Licensed under the [MIT licenses](https://raw.github.com/alexanderdickson/waitForImages/master/LICENSE-MIT).
 
