@@ -38,7 +38,7 @@ Alternatively, you can install with [`bower`](http://bower.io/).
 bower install waitForImages
 ```
 
-Of course, these need to be loaded after `jQuery` is made available. The current version supports >= jQuery 1.8. If you find incompatibility issues, please check out a previous tagged version.
+Of course, these need to be loaded after `jQuery` is made available. The current version should be supported by at least jQuery 1.8, or perhaps earlier. If you find incompatibility issues, please check out a previous tagged version.
 
 ##Usage##
 
