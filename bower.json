@@ -23,6 +23,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1"
+    "jquery": ">=1.8"
   }
 }
