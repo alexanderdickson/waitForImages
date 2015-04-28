@@ -1,7 +1,15 @@
 /*! waitForImages jQuery Plugin - v2.0.0 - 2015-04-28
 * https://github.com/alexanderdickson/waitForImages
 * Copyright (c) 2015 Alex Dickson; Licensed MIT */
-;(function ($) {
+;(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
     // Namespace all events.
     var eventNamespace = 'waitForImages';
 
@@ -201,4 +209,4 @@
         return deferred.promise();
 
     };
-}(jQuery));
+}));
