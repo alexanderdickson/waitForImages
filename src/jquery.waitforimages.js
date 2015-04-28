@@ -23,11 +23,7 @@
             return false;
         }
 
-        // Firefox's `complete` property will always be `true` even if the
-        // image has not been downloaded. Doing it this way works in Firefox.
-        var img = new Image();
-        img.src = obj.src;
-        return !img.complete;
+        return !obj.complete;
     };
 
     $.fn.waitForImages = function () {

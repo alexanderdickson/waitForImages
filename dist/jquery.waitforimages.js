@@ -1,4 +1,4 @@
-/*! waitForImages jQuery Plugin - v2.0.0 - 2015-02-25
+/*! waitForImages jQuery Plugin - v2.0.0 - 2015-04-28
 * https://github.com/alexanderdickson/waitForImages
 * Copyright (c) 2015 Alex Dickson; Licensed MIT */
 ;(function ($) {
@@ -26,11 +26,7 @@
             return false;
         }
 
-        // Firefox's `complete` property will always be `true` even if the
-        // image has not been downloaded. Doing it this way works in Firefox.
-        var img = new Image();
-        img.src = obj.src;
-        return !img.complete;
+        return !obj.complete;
     };
 
     $.fn.waitForImages = function () {
