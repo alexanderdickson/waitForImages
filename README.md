@@ -68,7 +68,7 @@ In the callbacks, `this` is a reference to the collection that `waitForImages()`
 
 ###Advanced###
 
-You can pass a second function as a callback that will be called for each image that is loaded, with some information passed as arguments.
+You can pass a second function as a callback that will be called for each image that is loaded (if an image is already cached, you may not receive a callback for it), with some information passed as arguments.
 
 ```javascript
 $('selector').waitForImages(function() {
