@@ -1,5 +1,6 @@
 {
   "title": "waitForImages jQuery Plugin",
+  "main": "./dist/jquery.waitforimages.js",
   "name": "jquery.waitforimages",
   "author": "Alexander Dickson",
   "version": "2.0.2",
