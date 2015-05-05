@@ -37,7 +37,9 @@ module.exports = function(grunt) {
         browser: true,
         globals: {
           jQuery: true,
-          define: true
+          define: true,
+          module: true,
+          require: true
         }
       },
     },
