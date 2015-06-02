@@ -68,7 +68,7 @@ In the callbacks, `this` is a reference to the collection that `waitForImages()`
 
 ###Advanced###
 
-You can pass a second function as a callback that will be called for each image that is loaded (if an image is already cached, you may not receive a callback for it), with some information passed as arguments.
+You can pass a second function as a callback that will be called for each image that is loaded, with some information passed as arguments.
 
 ```javascript
 $('selector').waitForImages(function() {
@@ -120,9 +120,10 @@ You may also set the CSS properties that possibly contain image references yours
 $.waitForImages.hasImgProperties = ['backgroundImage'];
 ```
 
-waitForImages also exposes a custom selector, `:uncached`, which when used in conjunction with the `img` selector, allows you to select `img` elements that are not cached already by the browser.
+waitForImages also exposes two custom selectors, `img:has-src` and `img:uncached`, (both used in conjunction with the `img` selector), which allow you to select `img` elements with a valid `src` attribute or that are not already cached already by the browser, respectively.
 
 ```javascript
+$('img').not(':has-src').remove();
 $('img:uncached').attr('title', 'Loading Image');
 ```
 

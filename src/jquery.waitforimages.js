@@ -25,12 +25,19 @@
         hasImageAttributes: ['srcset']
     };
 
-    // Custom selector to find `img` elements that have a valid `src`
-    // attribute and have not already loaded.
+    // Custom selector to find all `img` elements with a valid `src` attribute.
+    $.expr[':']['has-src'] = function (obj) {
+        // Ensure we are dealing with an `img` element with a valid
+        // `src` attribute.
+        return $(obj).is('img[src][src!=""]');
+    };
+
+    // Custom selector to find images which are not already cached by the
+    // browser.
     $.expr[':'].uncached = function (obj) {
         // Ensure we are dealing with an `img` element with a valid
         // `src` attribute.
-        if (!$(obj).is('img[src][src!=""]')) {
+        if (!$(obj).is(':has-src')) {
             return false;
         }
 
@@ -101,7 +108,7 @@
 
                     // If an `img` element, add it. But keep iterating in
                     // case it has a background image too.
-                    if (element.is('img:uncached')) {
+                    if (element.is('img:has-src')) {
                         allImgs.push({
                             src: element.attr('src'),
                             element: element[0]
@@ -151,7 +158,7 @@
                 });
             } else {
                 // For images only, the task is simpler.
-                obj.find('img:uncached')
+                obj.find('img:has-src')
                     .each(function () {
                     allImgs.push({
                         src: this.src,
