@@ -1,4 +1,4 @@
-/*! waitForImages jQuery Plugin - v2.0.2 - 2015-06-02
+/*! waitForImages jQuery Plugin - v2.1.0 - 2015-12-23
 * https://github.com/alexanderdickson/waitForImages
 * Copyright (c) 2015 Alex Dickson; Licensed MIT */
 ;(function (factory) {
@@ -111,7 +111,8 @@
 
                     // If an `img` element, add it. But keep iterating in
                     // case it has a background image too.
-                    if (element.is('img:has-src')) {
+                    if (element.is('img:has-src') &&
+                        !element[0].hasAttribute('srcset')) {
                         allImgs.push({
                             src: element.attr('src'),
                             element: element[0]
@@ -145,17 +146,10 @@
                             return true;
                         }
 
-                        // Check for multiple comma separated images
-                        attributeValues = attributeValue.split(',');
-
-                        $.each(attributeValues, function(i, value) {
-                            // Trim value and get string before first
-                            // whitespace (for use with srcset).
-                            value = $.trim(value).split(' ')[0];
-                            allImgs.push({
-                                src: value,
-                                element: element[0]
-                            });
+                        allImgs.push({
+                            src: element.attr('src'),
+                            srcset: element.attr('srcset'),
+                            element: element[0]
                         });
                     });
                 });
@@ -212,6 +206,9 @@
 
                 });
 
+                if (typeof img.srcset !== "undefined") {
+                    image.srcset = img.srcset;
+                }
                 image.src = img.src;
             });
         });
