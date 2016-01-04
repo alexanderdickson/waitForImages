@@ -109,7 +109,7 @@
                     // If an `img` element, add it. But keep iterating in
                     // case it has a background image too.
                     if (element.is('img:has-src') &&
-                        !element[0].hasAttribute('srcset')) {
+                        !element.is('[srcset]')) {
                         allImgs.push({
                             src: element.attr('src'),
                             element: element[0]
@@ -203,7 +203,7 @@
 
                 });
 
-                if (typeof img.srcset !== "undefined") {
+                if (img.srcset) {
                     image.srcset = img.srcset;
                 }
                 image.src = img.src;
