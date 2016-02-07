@@ -86,19 +86,19 @@
             throw new TypeError('An invalid callback was supplied.');
         }
 
-        this.each(function () {
-            // Build a list of all imgs, dependent on what images will
-            // be considered.
-            var obj = $(this);
-            var allImgs = [];
-            // CSS properties which may contain an image.
-            var hasImgProperties = $.waitForImages.hasImageProperties || [];
-            // Element attributes which may contain an image.
-            var hasImageAttributes = $.waitForImages.hasImageAttributes || [];
-            // To match `url()` references.
-            // Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
-            var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
+        // Build a list of all imgs, dependent on what images will
+        // be considered.
+        var obj = $(this);
+        var allImgs = [];
+        // CSS properties which may contain an image.
+        var hasImgProperties = $.waitForImages.hasImageProperties || [];
+        // Element attributes which may contain an image.
+        var hasImageAttributes = $.waitForImages.hasImageAttributes || [];
+        // To match `url()` references.
+        // Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
+        var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
 
+        this.each(function () {
             if (waitForAll) {
 
                 // Get all elements (including the original), as any one of
@@ -166,51 +166,51 @@
                     });
                 });
             }
+        });
 
-            allImgsLength = allImgs.length;
-            allImgsLoaded = 0;
+        allImgsLength = allImgs.length;
+        allImgsLoaded = 0;
 
-            // If no images found, don't bother.
-            if (allImgsLength === 0) {
-                finishedCallback.call(obj[0]);
-                deferred.resolveWith(obj[0]);
-            }
+        // If no images found, don't bother.
+        if (allImgsLength === 0) {
+            finishedCallback.call(obj[0]);
+            deferred.resolveWith(obj[0]);
+        }
 
-            $.each(allImgs, function (i, img) {
+        $.each(allImgs, function (i, img) {
 
-                var image = new Image();
-                var events =
-                  'load.' + eventNamespace + ' error.' + eventNamespace;
+            var image = new Image();
+            var events =
+              'load.' + eventNamespace + ' error.' + eventNamespace;
 
-                // Handle the image loading and error with the same callback.
-                $(image).one(events, function me (event) {
-                    // If an error occurred with loading the image, set the
-                    // third argument accordingly.
-                    var eachArguments = [
-                        allImgsLoaded,
-                        allImgsLength,
-                        event.type == 'load'
-                    ];
-                    allImgsLoaded++;
+            // Handle the image loading and error with the same callback.
+            $(image).one(events, function me (event) {
+                // If an error occurred with loading the image, set the
+                // third argument accordingly.
+                var eachArguments = [
+                    allImgsLoaded,
+                    allImgsLength,
+                    event.type == 'load'
+                ];
+                allImgsLoaded++;
 
-                    eachCallback.apply(img.element, eachArguments);
-                    deferred.notifyWith(img.element, eachArguments);
+                eachCallback.apply(img.element, eachArguments);
+                deferred.notifyWith(img.element, eachArguments);
 
-                    // Unbind the event listeners. I use this in addition to
-                    // `one` as one of those events won't be called (either
-                    // 'load' or 'error' will be called).
-                    $(this).off(events, me);
+                // Unbind the event listeners. I use this in addition to
+                // `one` as one of those events won't be called (either
+                // 'load' or 'error' will be called).
+                $(this).off(events, me);
 
-                    if (allImgsLoaded == allImgsLength) {
-                        finishedCallback.call(obj[0]);
-                        deferred.resolveWith(obj[0]);
-                        return false;
-                    }
+                if (allImgsLoaded == allImgsLength) {
+                    finishedCallback.call(obj[0]);
+                    deferred.resolveWith(obj[0]);
+                    return false;
+                }
 
-                });
-
-                image.src = img.src;
             });
+
+            image.src = img.src;
         });
 
         return deferred.promise();
