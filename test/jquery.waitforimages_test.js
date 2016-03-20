@@ -6,6 +6,7 @@
     var IMG_ELEMENTS = 1;
     var DIV_ELEMENTS = 1;
     var ATTR_ELEMENTS = 1;
+    var IMG_SRCSET_ELEMENTS = 1;
 
     var getImageUrl = function() {
 		return "about:";
@@ -35,6 +36,12 @@
 
             for (i = 0; i < ATTR_ELEMENTS; i++) {
                 $("<div />", {
+                    srcset: getImageUrl() + " 2x"
+                }).appendTo(this.container);
+            }
+
+            for (i = 0; i < IMG_SRCSET_ELEMENTS; i++) {
+                $("<img />", {
                     srcset: getImageUrl() + " 2x"
                 }).appendTo(this.container);
             }
@@ -168,7 +175,7 @@
 
     asyncTest("Each Callback", function() {
 
-		expect(4 * (IMG_ELEMENTS + DIV_ELEMENTS + ATTR_ELEMENTS + 1) + 1);
+		expect(4 * (IMG_ELEMENTS + DIV_ELEMENTS + ATTR_ELEMENTS + IMG_SRCSET_ELEMENTS + 1) + 1);
 
 		var self = this;
 
@@ -188,7 +195,7 @@
 
     asyncTest("Each Promise", function() {
 
-        expect(4 * (IMG_ELEMENTS + DIV_ELEMENTS + ATTR_ELEMENTS + 1) + 1);
+        expect(4 * (IMG_ELEMENTS + DIV_ELEMENTS + ATTR_ELEMENTS + IMG_SRCSET_ELEMENTS + 1) + 1);
 
         var self = this;
 
