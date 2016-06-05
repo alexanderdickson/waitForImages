@@ -32,10 +32,16 @@ You can either grab the source yourself...
 
 - [Hosted on CDNJS (minified)](http://cdnjs.cloudflare.com/ajax/libs/jquery.waitforimages/1.5.0/jquery.waitforimages.min.js)
 
-Alternatively, you can install with [`bower`](http://bower.io/).
+Alternatively, you can install with [`bower`](http://bower.io/)...
 
 ```bash
 bower install waitForImages
+```
+
+...or [`npm`](https://www.npmjs.com/)...
+
+```bash
+npm install jquery.waitforimages
 ```
 
 Of course, these need to be loaded after `jQuery` is made available. The current version should be supported by at least jQuery 1.8, or perhaps earlier. If you find incompatibility issues, please check out a previous tagged version.
