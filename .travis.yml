@@ -9,5 +9,4 @@ node_js:
 
 install:
   - npm i -g npm@latest
-  - npm i -g grunt-cli
   - npm install
