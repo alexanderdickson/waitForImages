@@ -55,6 +55,24 @@
         }
     };
 
+    var setup2 = {
+        setup: function() {
+            setup.setup.call(this);
+            this.container2 = $("<div />").appendTo("#qunit-fixture");
+            this.container2.css("background", "url(" + getImageUrl() + ")");
+            $("<img />", {
+                src: getImageUrl(),
+                alt: ""
+            }).appendTo(this.container2);
+            this.combinedContainers = this.container.add(this.container2);
+        },
+
+        teardown: function() {
+            setup.teardown.call(this);
+            this.container2.empty();
+        }
+    };
+
     module("Argument checking", setup);
 
     test("Check Callbacks", function() {
@@ -211,6 +229,43 @@
             start();
         }, true);
 
+    });
+
+    module("Two parent containers", setup2);
+
+    asyncTest("Finished Callback gets called after all Each Callbacks", function() {
+
+        expect(15);
+
+        var self = this;
+        var finishCalled = false;
+
+        this.combinedContainers.waitForImages(function() {
+            finishCalled = true;
+            ok(true, "Assert finished callback called.");
+            start();
+        }, function() {
+            equal(finishCalled, false);
+            ok(true, "Assert each callback called.");
+        }, true);
+
+    });
+
+    asyncTest("Finished Promise gets resolved after all Each Promises", function() {
+        expect(22);
+
+        var self = this;
+        var finishCalled = false;
+
+        this.combinedContainers.waitForImages(true).done(function() {
+            finishCalled = true;
+            ok(true, "Assert done promise called.");
+            start();
+        }).progress(function(loaded, count, success) {
+            equal(finishCalled, false);
+            ok(loaded <= count, "Assert loaded count is never larger than the count.");
+            ok(true, "Assert each callback called.");
+        });
     });
 
 }(jQuery));
