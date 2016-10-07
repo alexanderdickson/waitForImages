@@ -87,18 +87,18 @@
             throw new TypeError('An invalid callback was supplied.');
         }
 
+        // Build a list of all imgs, dependent on what images will
+        // be considered.
+        var obj = $(this);
         var allImgs = [];
+        // CSS properties which may contain an image.
+        var hasImgProperties = $.waitForImages.hasImageProperties || [];
+        // Element attributes which may contain an image.
+        var hasImageAttributes = $.waitForImages.hasImageAttributes || [];
+        // To match `url()` references.
+        // Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
+        var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
         this.each(function () {
-            // Build a list of all imgs, dependent on what images will
-            // be considered.
-            var obj = $(this);
-            // CSS properties which may contain an image.
-            var hasImgProperties = $.waitForImages.hasImageProperties || [];
-            // Element attributes which may contain an image.
-            var hasImageAttributes = $.waitForImages.hasImageAttributes || [];
-            // To match `url()` references.
-            // Spec: http://www.w3.org/TR/CSS2/syndata.html#value-def-uri
-            var matchUrl = /url\(\s*(['"]?)(.*?)\1\s*\)/g;
 
             if (waitForAll) {
 
