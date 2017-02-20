@@ -6,7 +6,7 @@ Licensed under the [MIT licenses](https://raw.github.com/alexanderdickson/waitFo
 
 [http://alexanderdickson.com](http://alexanderdickson.com)
 
-[![Donate](http://www.pledgie.com/campaigns/18572.svg?skin_name=chrome)](http://www.pledgie.com/campaigns/18572)
+[![Donate](http://www.pledgie.com/campaigns/18572.png?skin_name=chrome)](http://www.pledgie.com/campaigns/18572)
 
 
 [![Build Status](https://secure.travis-ci.org/alexanderdickson/waitForImages.svg)](http://travis-ci.org/alexanderdickson/waitForImages)
