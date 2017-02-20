@@ -13,6 +13,11 @@
     // Namespace all events.
     var eventNamespace = 'waitForImages';
 
+    // Is srcset supported by this browser?
+    var hasSrcset = (function(img) {
+        return img.srcset && img.sizes;
+    })(new Image());
+
     // CSS properties which contain references to images.
     $.waitForImages = {
         hasImageProperties: [
@@ -208,8 +213,9 @@
 
             });
 
-            if (img.srcset) {
+            if (hasSrcset && img.srcset) {
                 image.srcset = img.srcset;
+                image.sizes = img.sizes;
             }
             image.src = img.src;
         });
