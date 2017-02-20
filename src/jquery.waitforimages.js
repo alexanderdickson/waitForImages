@@ -49,6 +49,7 @@
         var allImgsLength = 0;
         var allImgsLoaded = 0;
         var deferred = $.Deferred();
+        var retobj = {};
 
         var finishedCallback;
         var eachCallback;
@@ -163,6 +164,7 @@
 
             allImgsLength = allImgs.length;
             allImgsLoaded = 0;
+            retobj.allImgsLength = allImgs.length;
 
             // If no images found, don't bother.
             if (allImgsLength === 0) {
@@ -210,7 +212,7 @@
             });
         });
 
-        return deferred.promise();
+        return deferred.promise(retobj);
 
     };
 }));
