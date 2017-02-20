@@ -146,6 +146,7 @@
                         allImgs.push({
                             src: element.attr('src'),
                             srcset: element.attr('srcset'),
+                            sizes: element.attr('sizes'),
                             element: element[0]
                         });
                     });
@@ -169,7 +170,9 @@
                 finishedCallback.call(obj[0]);
                 deferred.resolveWith(obj[0]);
             }
-
+            
+            var has_srcset = ('srcset' in document.createElement('img')) && ('sizes' in document.createElement('img'));
+            
             $.each(allImgs, function (i, img) {
 
                 var image = new Image();
@@ -203,9 +206,11 @@
 
                 });
 
-                if (img.srcset) {
+                if (img.srcset && has_srcset) {
                     image.srcset = img.srcset;
+                    image.sizes = img.sizes;
                 }
+                
                 image.src = img.src;
             });
         });
