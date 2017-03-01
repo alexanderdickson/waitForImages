@@ -6,7 +6,7 @@ Licensed under the [MIT licenses](https://raw.github.com/alexanderdickson/waitFo
 
 [http://alexanderdickson.com](http://alexanderdickson.com)
 
-[![Donate](http://www.pledgie.com/campaigns/18572.png?skin_name=chrome)](http://www.pledgie.com/campaigns/18572)
+[![Donate](http://www.pledgie.com/campaigns/18572.svg?skin_name=chrome)](http://www.pledgie.com/campaigns/18572)
 
 
 [![Build Status](https://secure.travis-ci.org/alexanderdickson/waitForImages.svg)](http://travis-ci.org/alexanderdickson/waitForImages)
@@ -55,7 +55,7 @@ There are two ways to use waitForImages: with a standard callback system (previo
 Just provide a callback function and it will be called once all descendant images have loaded.
 
 ```javascript
-$('selector').waitForImages(function() {
+$('selector').waitForImages(() => {
     // All descendant images have loaded, now slide up.
     $(this).slideUp();
 });
@@ -64,7 +64,7 @@ $('selector').waitForImages(function() {
 You can also use the jQuery promise API.
 
 ```javascript
-$('selector').waitForImages().done(function() {
+$('selector').waitForImages().done(() => {
     // All descendant images have loaded, now slide up.
     $(this).slideUp();
 });
@@ -77,10 +77,10 @@ In the callbacks, `this` is a reference to the collection that `waitForImages()`
 You can pass a second function as a callback that will be called for each image that is loaded, with some information passed as arguments.
 
 ```javascript
-$('selector').waitForImages(function() {
+$('selector').waitForImages(() => {
     alert('All images have loaded.');
-}, function(loaded, count, success) {
-   alert(loaded + ' of ' + count + ' images has ' + (success ? 'loaded' : 'failed to load') +  '.');
+}, (loaded, count, success) => {
+   alert(`${loaded} of ${count} images has ${success ? 'loaded' : 'failed to load'}.`);
    $(this).addClass('loaded');
 });
 ```
@@ -88,8 +88,8 @@ $('selector').waitForImages(function() {
 Using the jQuery promises API, you can then use the `progress()` method to know when an individual image has been loaded.
 
 ```javascript
-$('selector').waitForImages().progress(function(loaded, count, success) {
-   alert(loaded + ' of ' + count + ' images has ' + (success ? 'loaded' : 'failed to load') +  '.');
+$('selector').waitForImages().progress((loaded, count, success) => {
+   alert(`${loaded} of ${count} images has ${success ? 'loaded' : 'failed to load'}.`);
    $(this).addClass('loaded');
 });
 ```
@@ -102,10 +102,10 @@ If you want to skip the first argument, pass `$.noop` or alternatively, pass an 
 
 ```javascript
 $('selector').waitForImages({
-    finished: function() {
+    finished: () => {
         // ...
     },
-    each: function() {
+    each: () => {
        // ...
     },
     waitForAll: true
@@ -115,7 +115,7 @@ $('selector').waitForImages({
 To use this with the promise API, simply pass one argument, which is `waitForAll`.
 
 ```javascript
-$('selector').waitForImages(true).done(function() {
+$('selector').waitForImages(true).done(() => {
     // ...
 });
 ```
@@ -138,3 +138,4 @@ $('img:uncached').attr('title', 'Loading Image');
 Please use the [Issues](https://github.com/alexanderdickson/waitForImages/issues) for any bugs, feature requests, etc.
 
 If you're having problems using the plugin, [ask a question on Stack Overflow](http://stackoverflow.com/questions/tagged/waitforimages).
+
