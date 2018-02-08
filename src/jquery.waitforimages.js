@@ -31,7 +31,7 @@
     };
 
     // Custom selector to find all `img` elements with a valid `src` attribute.
-    $.expr[':']['has-src'] = function (obj) {
+    $.expr.pseudos['has-src'] = function (obj) {
         // Ensure we are dealing with an `img` element with a valid
         // `src` attribute.
         return $(obj).is('img[src][src!=""]');
@@ -39,7 +39,7 @@
 
     // Custom selector to find images which are not already cached by the
     // browser.
-    $.expr[':'].uncached = function (obj) {
+    $.expr.pseudos.uncached = function (obj) {
         // Ensure we are dealing with an `img` element with a valid
         // `src` attribute.
         if (!$(obj).is(':has-src')) {
