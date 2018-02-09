@@ -3,9 +3,11 @@ sudo: false
 language: node_js
 
 node_js:
+  - node
+  - lts/*
+  - 8
   - 6
   - 4
-  - '0.12'
 
 install:
   - npm i -g npm@latest
