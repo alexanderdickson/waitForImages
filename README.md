@@ -1,12 +1,12 @@
 # waitForImages
 
-Copyright (c) 2011-2017 Alexander Dickson [@alexdickson](http://twitter.com/alexdickson)
+Copyright (c) 2011-2018 Alexander Dickson [@alexdickson](http://twitter.com/alexdickson)
 
 Licensed under the [MIT licenses](https://raw.github.com/alexanderdickson/waitForImages/master/LICENSE-MIT).
 
 [http://alexanderdickson.com](http://alexanderdickson.com)
 
-[![Donate](http://www.pledgie.com/campaigns/18572.png?skin_name=chrome)](http://www.pledgie.com/campaigns/18572)
+[Donate!](http://paypal.me/alexwilliamdickson)
 
 
 [![Build Status](https://secure.travis-ci.org/alexanderdickson/waitForImages.svg)](http://travis-ci.org/alexanderdickson/waitForImages)
