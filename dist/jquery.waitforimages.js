@@ -1,4 +1,4 @@
-/*! waitForImages jQuery Plugin - v2.2.0 - 2018-02-08
+/*! waitForImages jQuery Plugin - v2.4.0 - 2018-02-13
 * https://github.com/alexanderdickson/waitForImages
 * Copyright (c) 2018 Alex Dickson; Licensed MIT */
 ;(function (factory) {
