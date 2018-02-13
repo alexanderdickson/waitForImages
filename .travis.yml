@@ -1,14 +1,16 @@
 sudo: false
-
 language: node_js
-
 node_js:
-  - node
-  - lts/*
-  - 8
-  - 6
-  - 4
-
+- node
+- lts/*
+- 8
+- 6
+- 4
 install:
-  - npm i -g npm@latest
-  - npm install
+- npm i -g npm@latest
+- npm install
+deploy:
+  provider: npm
+  email: alex@alexanderdickson.com
+  api_key:
+    secure: Tjp9eJJqvvN0DHtdk9NKCKH6mq+0rang1tAhtUWoxUQ4TZySVFR9NT3PzuqHIgxTY7wR8/zquyc4i9yXBv2Wilp1U1fPZrZpkEg62y+NlFMdikb6sjuL/QoTS6LFYwirE/P0MJiXPk1lTxUkE6emHxgomWlmYClnVRst3hq4Xy4=
