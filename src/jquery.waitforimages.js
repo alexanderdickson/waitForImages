@@ -15,7 +15,7 @@
 
     // Is srcset supported by this browser?
     var hasSrcset = (function(img) {
-        return img.srcset && img.sizes;
+        return img.srcset !== undefined && img.sizes !== undefined;
     })(new Image());
 
     // CSS properties which contain references to images.
@@ -213,9 +213,9 @@
 
             });
 
-            if (hasSrcset && img.srcset) {
-                image.srcset = img.srcset;
-                image.sizes = img.sizes;
+            if (hasSrcset && img.element.srcset) {
+                image.srcset = img.element.srcset;
+                image.sizes = img.element.sizes;
             }
             image.src = img.src;
         });

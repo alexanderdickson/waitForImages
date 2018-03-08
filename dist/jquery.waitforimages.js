@@ -1,4 +1,4 @@
-/*! waitForImages jQuery Plugin - v2.4.0 - 2018-02-13
+/*! waitForImages jQuery Plugin - v2.5.0 - 2018-03-08
 * https://github.com/alexanderdickson/waitForImages
 * Copyright (c) 2018 Alex Dickson; Licensed MIT */
 ;(function (factory) {
@@ -18,7 +18,7 @@
 
     // Is srcset supported by this browser?
     var hasSrcset = (function(img) {
-        return img.srcset && img.sizes;
+        return img.srcset !== undefined && img.sizes !== undefined;
     })(new Image());
 
     // CSS properties which contain references to images.
@@ -216,9 +216,9 @@
 
             });
 
-            if (hasSrcset && img.srcset) {
-                image.srcset = img.srcset;
-                image.sizes = img.sizes;
+            if (hasSrcset && img.element.srcset) {
+                image.srcset = img.element.srcset;
+                image.sizes = img.element.sizes;
             }
             image.src = img.src;
         });
