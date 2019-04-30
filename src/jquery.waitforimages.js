@@ -97,7 +97,7 @@
         waitForAll = !! waitForAll;
 
         // Ensure callbacks are functions.
-        if (!$.isFunction(finishedCallback) || !$.isFunction(eachCallback)) {
+        if (typeof finishedCallback !== 'function' || typeof eachCallback !== 'function') {
             throw new TypeError('An invalid callback was supplied.');
         }
 
