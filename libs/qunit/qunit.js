@@ -304,7 +304,7 @@ var QUnit = {
 		test.queue();
 	},
 
-	// Specify the number of expected assertions to gurantee that failed test (no assertions are run at all) don't slip through.
+	// Specify the number of expected assertions to guarantee that failed test (no assertions are run at all) don't slip through.
 	expect: function(asserts) {
 		config.current.expected = asserts;
 	},
@@ -487,7 +487,7 @@ var config = {
 	moduleDone: []
 };
 
-// Load paramaters
+// Load parameters
 (function() {
 	var location = window.location || { search: "", protocol: "file:" },
 		params = location.search.slice( 1 ).split( "&" ),
@@ -1110,7 +1110,7 @@ QUnit.equiv = (function() {
 		// for string, boolean, number and null
 		function useStrictEquality(b, a) {
 			if (b instanceof a.constructor || a instanceof b.constructor) {
-				// to catch short annotaion VS 'new' annotation of a
+				// to catch short annotation VS 'new' annotation of a
 				// declaration
 				// e.g. var i = 1;
 				// var j = new Number(1);
@@ -1139,7 +1139,7 @@ QUnit.equiv = (function() {
 				return QUnit.objectType(b) === "regexp" &&
 					// the regex itself
 					a.source === b.source &&
-					// and its modifers
+					// and its modifiers
 					a.global === b.global &&
 					// (gmi) ...
 					a.ignoreCase === b.ignoreCase &&
@@ -1188,7 +1188,7 @@ QUnit.equiv = (function() {
 
 			"object" : function(b, a) {
 				var i, j, loop;
-				var eq = true; // unless we can proove it
+				var eq = true; // unless we can prove it
 				var aProperties = [], bProperties = []; // collection of
 														// strings
 
@@ -1650,7 +1650,7 @@ QUnit.diff = (function() {
 	};
 }());
 
-// for CommonJS enviroments, export everything
+// for CommonJS environments, export everything
 if ( typeof exports !== "undefined" || typeof require !== "undefined" ) {
 	extend(exports, QUnit);
 }
